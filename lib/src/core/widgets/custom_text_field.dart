@@ -27,15 +27,17 @@ class CustomTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(5),
         border: Border.all(
           color: theme.primaryBorderColor,
-          width: 2,
+          width: 1,
         ),
       ),
       child: TextField(
+        style: theme.commonTextStyle,
         decoration: InputDecoration(
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           border: InputBorder.none,
           hintText: placeholderText,
+          hintStyle: theme.commonTextStyle,
         ),
       ),
     );
