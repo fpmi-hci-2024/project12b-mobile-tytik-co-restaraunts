@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 
-import '../feature/auth_page/presentation/sign_in_page.dart';
-import '../feature/home_page/presentation/home_page.dart';
+import '../../feature/auth_page/presentation/sign_in_page.dart';
+import '../../feature/home_page/presentation/home_page.dart';
 
 part 'app_router.gr.dart';
 
