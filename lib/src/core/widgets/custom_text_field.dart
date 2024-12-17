@@ -30,14 +30,20 @@ class CustomTextField extends StatelessWidget {
           width: 1,
         ),
       ),
-      child: TextField(
-        style: theme.commonTextStyle,
-        decoration: InputDecoration(
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          border: InputBorder.none,
-          hintText: placeholderText,
-          hintStyle: theme.commonTextStyle,
+      child: SizedBox(
+        height: height,
+        child: TextField(
+          style: theme.commonTextStyle,
+          textAlign: TextAlign.start,
+          decoration: InputDecoration(
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 10,
+              vertical: 14,
+            ),
+            border: InputBorder.none,
+            hintText: placeholderText,
+            hintStyle: theme.commonTextStyle,
+          ),
         ),
       ),
     );

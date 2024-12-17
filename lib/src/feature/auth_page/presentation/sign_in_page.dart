@@ -28,6 +28,7 @@ class SignInPage extends StatelessWidget {
           fontWeight: FontWeight.w800,
         ),
       ),
+      webVerticalPadding: MediaQuery.of(context).size.width * 0.3,
       body: Stack(
         children: [
           Align(
@@ -49,25 +50,25 @@ class SignInPage extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 40),
+            padding: const EdgeInsets.symmetric(horizontal: 40),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomTextField(
-                  placeholderText: 'Login',
+                  placeholderText: theme.loginText,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 19,
                 ),
                 CustomTextField(
-                  placeholderText: 'Password',
+                  placeholderText: theme.passwordText,
                 ),
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {},
                     child: Text(
-                      'Forgot password?',
+                      theme.forgotPasswordButtonText,
                       textAlign: TextAlign.right,
                       style: TextStyle(
                         color: theme.primaryBorderColor,
@@ -78,18 +79,20 @@ class SignInPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 13,
                 ),
                 CustomButton.auth(
-                  text: 'Sign In',
+                  text: theme.signInButtonText,
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  child: Text('OR'),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Text(
+                    theme.orText,
+                  ),
                 ),
                 CustomButton.auth(
-                  text: 'Register',
+                  text: theme.registerButtonText,
                 ),
               ],
             ),
