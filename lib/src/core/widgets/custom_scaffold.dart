@@ -7,12 +7,12 @@ import 'config/common_widgets_theme.dart';
 class CustomScaffold extends StatelessWidget {
   final Widget body;
   final AppBar? appBar;
-  final double webVerticalPadding;
+  final double webMaxWidth;
 
   const CustomScaffold({
     required this.body,
     this.appBar,
-    this.webVerticalPadding = 0,
+    this.webMaxWidth = 0,
     super.key,
   });
 
@@ -28,13 +28,12 @@ class CustomScaffold extends StatelessWidget {
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           appBar: appBar,
-          body: Padding(
-            padding: kIsWeb
-                ? EdgeInsets.symmetric(
-                    horizontal: webVerticalPadding,
-                  )
-                : EdgeInsets.zero,
-            child: body,
+          body: Center(
+            child: Container(
+                constraints: BoxConstraints(
+                  maxWidth: kIsWeb ? webMaxWidth : double.infinity,
+                ),
+                child: body),
           ),
           backgroundColor: Colors.transparent,
         ),

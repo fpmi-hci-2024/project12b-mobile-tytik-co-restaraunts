@@ -20,7 +20,7 @@ class SignInPage extends StatelessWidget {
     final theme = locator<AuthTheme>();
     return CustomScaffold(
       appBar: CustomAppBar(
-        titleText: 'Tytik&CO',
+        titleText: theme.appName,
         height: 100,
         borderColor: theme.primaryBorderColor,
         titleStyle: const TextStyle(
@@ -28,7 +28,7 @@ class SignInPage extends StatelessWidget {
           fontWeight: FontWeight.w800,
         ),
       ),
-      webVerticalPadding: MediaQuery.of(context).size.width * 0.3,
+      webMaxWidth: 600,
       body: Stack(
         children: [
           Align(
@@ -36,11 +36,11 @@ class SignInPage extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 53,
                 ),
                 Text(
-                  'Sign In',
+                  theme.signInText,
                   style: const TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.w800,

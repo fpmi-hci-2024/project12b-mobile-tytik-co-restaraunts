@@ -1,6 +1,6 @@
-import '../../../../config/themes/app_colors.dart';
+import '../../../../config/themes/app_theme.dart';
 
-class AuthTheme extends AppColors {
+class AuthTheme extends AppTheme {
   final String loginText = 'Login';
 
   final String passwordText = 'Password';
@@ -12,4 +12,6 @@ class AuthTheme extends AppColors {
   final String registerButtonText = 'Register';
 
   final String forgotPasswordButtonText = 'Forgot password?';
+
+  final String signInText = 'Sign In';
 }
