@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../locator/locator.dart';
@@ -38,7 +39,7 @@ class CustomTextField extends StatelessWidget {
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 10,
-              vertical: 14,
+              vertical: kIsWeb ? 14 : 10,
             ),
             border: InputBorder.none,
             hintText: placeholderText,

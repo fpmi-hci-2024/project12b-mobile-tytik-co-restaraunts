@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 
+import '../../feature/auth_page/presentation/register_page.dart';
 import '../../feature/auth_page/presentation/sign_in_page.dart';
 import '../../feature/home_page/presentation/home_page.dart';
 
@@ -19,6 +20,10 @@ class AppRouter extends _$AppRouter {
           page: SignInRoute.page,
           path: '/sign_in',
           initial: true,
+        ),
+        AutoRoute(
+          page: RegisterRoute.page,
+          path: '/register',
         ),
       ];
 }
