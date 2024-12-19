@@ -38,7 +38,7 @@ class RegisterPage extends StatelessWidget {
                   height: 53,
                 ),
                 Text(
-                  theme.signInText,
+                  theme.registerText,
                   style: const TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.w800,
@@ -64,9 +64,11 @@ class RegisterPage extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                     children: [
-                      const TextSpan(text: 'Already have an Account? '),
                       TextSpan(
-                        text: 'Sign in!',
+                        text: theme.alreadyHaveAccountText,
+                      ),
+                      TextSpan(
+                        text: theme.goToSignInText,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               fontSize: 12,
                               decoration: TextDecoration.underline,
@@ -85,25 +87,25 @@ class RegisterPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomTextField(
-                  placeholderText: 'Name',
+                  placeholderText: theme.nameTextFieldPlaceholder,
                 ),
                 const SizedBox(
                   height: 19,
                 ),
                 CustomTextField(
-                  placeholderText: 'E-mail',
+                  placeholderText: theme.emailTextFieldPlaceholder,
                 ),
                 const SizedBox(
                   height: 19,
                 ),
                 CustomTextField(
-                  placeholderText: 'Password',
+                  placeholderText: theme.passwordTextFieldPlaceholder,
                 ),
                 const SizedBox(
                   height: 19,
                 ),
                 CustomTextField(
-                  placeholderText: 'Confirm Password',
+                  placeholderText: theme.confirmPasswordTextFieldPlaceholder,
                 ),
                 const SizedBox(
                   height: 38,
