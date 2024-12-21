@@ -85,6 +85,11 @@ class SignInPage extends StatelessWidget {
                 ),
                 CustomButton.auth(
                   text: theme.signInButtonText,
+                  onTap: () {
+                    appRouter.popAndPush(
+                      HomeRoute(),
+                    );
+                  },
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
