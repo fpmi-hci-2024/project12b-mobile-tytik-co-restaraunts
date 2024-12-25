@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
+import 'package:monkey_delivery/src/config/router/app_router.dart';
 import 'package:monkey_delivery/src/core/domain/entities/cafe.dart';
 import 'package:monkey_delivery/src/core/widgets/cafe_logo.dart';
 
@@ -31,13 +32,17 @@ class BigCafeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = locator<CommonWidgetsTheme>();
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        appRouter..push(const CafeRoute());
+      },
       child: Stack(
         children: [
-          CafeLogo(
+          ImageWithBorder(
             height: height,
             width: width,
             borderRadius: 10,
+            url:
+                'https://img.pikbest.com/origin/09/70/06/222pIkbEsTrCh.jpg!sw800',
           ),
           Positioned(
             bottom: 1,

@@ -45,7 +45,10 @@ class CafeCard extends StatelessWidget {
           ),
           child: Row(
             children: [
-              const CafeLogo(),
+              const ImageWithBorder(
+                  url: 'https://img.pikbest.com/origin/09/70/06/222pIkbEsTrCh.jpg!sw800',
+
+              ),
               const SizedBox(
                 width: 6,
               ),

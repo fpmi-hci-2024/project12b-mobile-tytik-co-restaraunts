@@ -4,17 +4,18 @@ import 'package:flutter/material.dart';
 import '../../locator/locator.dart';
 import 'config/common_widgets_theme.dart';
 
-class CafeLogo extends StatelessWidget {
+class ImageWithBorder extends StatelessWidget {
   final double height;
   final double width;
   final double borderRadius;
+  final String url;
 
-  const CafeLogo({
+  const ImageWithBorder({
     super.key,
     this.height = 50,
     this.width = 50,
     this.borderRadius = 5,
-
+    required this.url,
   });
 
   @override
@@ -33,11 +34,11 @@ class CafeLogo extends StatelessWidget {
         ),
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(borderRadius-1),
+        borderRadius: BorderRadius.circular(borderRadius - 1),
         child: CachedNetworkImage(
           fit: BoxFit.cover,
           imageUrl:
-              'https://img.pikbest.com/origin/09/70/06/222pIkbEsTrCh.jpg!sw800',
+              url,
         ),
       ),
     );
