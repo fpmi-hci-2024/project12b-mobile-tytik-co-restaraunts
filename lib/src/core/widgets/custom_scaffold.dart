@@ -6,7 +6,7 @@ import 'config/common_widgets_theme.dart';
 
 class CustomScaffold extends StatelessWidget {
   final Widget body;
-  final AppBar? appBar;
+  final PreferredSizeWidget? appBar;
   final double webMaxWidth;
 
   const CustomScaffold({
