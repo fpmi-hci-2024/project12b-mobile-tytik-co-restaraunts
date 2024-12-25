@@ -5,7 +5,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:monkey_delivery/src/config/router/app_router.dart';
 import 'package:monkey_delivery/src/core/domain/entities/cafe.dart';
-import 'package:monkey_delivery/src/core/widgets/cafe_logo.dart';
+import 'package:monkey_delivery/src/core/widgets/image_with_border.dart';
 
 import '../../locator/locator.dart';
 import 'config/common_widgets_theme.dart';

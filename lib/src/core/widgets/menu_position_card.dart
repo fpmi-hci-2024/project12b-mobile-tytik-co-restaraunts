@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:monkey_delivery/src/core/domain/entities/menu_position.dart';
 
 import '../../locator/locator.dart';
-import 'cafe_logo.dart';
+import 'image_with_border.dart';
 import 'config/common_widgets_theme.dart';
 
 class MenuPositionCard extends StatelessWidget {

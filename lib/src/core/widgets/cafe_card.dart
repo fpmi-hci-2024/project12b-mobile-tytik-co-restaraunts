@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:monkey_delivery/src/core/domain/entities/cafe.dart';
-import 'package:monkey_delivery/src/core/widgets/cafe_logo.dart';
+import 'package:monkey_delivery/src/core/widgets/image_with_border.dart';
 
 import '../../locator/locator.dart';
 import 'config/common_widgets_theme.dart';

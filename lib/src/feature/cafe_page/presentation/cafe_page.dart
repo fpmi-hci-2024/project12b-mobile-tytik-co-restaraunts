@@ -3,12 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:monkey_delivery/src/core/domain/entities/menu_position.dart';
+import 'package:monkey_delivery/src/core/widgets/custom_button.dart';
 import 'package:monkey_delivery/src/core/widgets/custom_switch.dart';
+import 'package:monkey_delivery/src/core/widgets/image_with_border.dart';
 import 'package:monkey_delivery/src/core/widgets/menu_position_card.dart';
 
 import '../../../core/domain/entities/cafe.dart';
 import '../../../core/widgets/big_cafe_card.dart';
-import '../../../core/widgets/cafe_card.dart';
 import '../../../core/widgets/custom_scaffold.dart';
 import '../../../core/widgets/cutom_app_bar_wrapper.dart';
 import '../../../locator/locator.dart';
@@ -147,6 +148,10 @@ class CafePage extends StatelessWidget {
                     shrinkWrap: true,
                     itemBuilder: (context, index) => MenuPositionCard(
                       menuPosition: items[index],
+                      onTap: () async => await _showBottomSheet(
+                        context,
+                        items[index],
+                      ),
                     ),
                     separatorBuilder: (context, index) => const SizedBox(
                       height: 25,
@@ -156,6 +161,120 @@ class CafePage extends StatelessWidget {
                 ),
               ],
             ),
+    );
+  }
+
+  Future<void> _showBottomSheet(
+      BuildContext context, MenuPosition position) async {
+    final theme = locator<CafeTheme>();
+    await showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(25.0),
+        ),
+      ),
+      builder: (context) {
+        return Container(
+          padding: const EdgeInsets.all(16.0),
+          decoration: BoxDecoration(
+            color: theme.bottomSheetColor,
+            borderRadius: const BorderRadius.vertical(
+              top: Radius.circular(25.0),
+            ),
+          ),
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 30,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    position.name,
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 16.0),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(15.0),
+                    child: ImageWithBorder(
+                      url: position.imageUrl,
+                      width: 250,
+                      height: 166.7,
+                    ),
+                  ),
+                  if (position.ingredients != null) ...[
+                    const SizedBox(height: 16.0),
+                    const Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Ingredients:',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 8.0),
+                    _BulletList(items: position.ingredients ?? []),
+                  ],
+                  const SizedBox(height: 16.0),
+                  CustomButton(
+                    text: 'Add To Cart',
+                    width: 200,
+                    height: 41,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _BulletList extends StatelessWidget {
+  final List<String> items;
+
+  const _BulletList({super.key, required this.items});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: items.map((item) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                '• ',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  item,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      }).toList(),
     );
   }
 }
