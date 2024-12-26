@@ -58,9 +58,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     Icons.arrow_back,
                   ),
                 ),
-              )
-            else
-              const SizedBox(width: 16.0),
+              ),
             if (leadingIcon != null)
               GestureDetector(
                 onTap: onLeadingTap,
@@ -85,7 +83,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            const SizedBox(width: 16.0),
+            if (addGoBackButton)
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                child: Icon(
+                  Icons.arrow_back,
+                  color: Colors.transparent,
+                ),
+              ),
             if (trailingIcon != null)
               GestureDetector(
                 onTap: onTrailingTap,
