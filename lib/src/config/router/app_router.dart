@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:monkey_delivery/src/feature/cart_page/presentation/cart_page.dart';
 
 import '../../feature/auth_page/presentation/register_page.dart';
 import '../../feature/auth_page/presentation/sign_in_page.dart';
@@ -29,6 +30,10 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           page: CafeRoute.page,
           path: '/cafe',
+        ),
+        AutoRoute(
+          page: CartRoute.page,
+          path: '/cart',
         ),
       ];
 }

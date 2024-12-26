@@ -56,15 +56,25 @@ class CustomWebAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                   const Spacer(),
                   leadingIcon != null
-                      ? Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: leadingIcon,
+                      ? GestureDetector(
+                          onTap: onLeadingTap,
+                          behavior: HitTestBehavior.opaque,
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: leadingIcon,
+                          ),
                         )
                       : const SizedBox(width: 16.0),
                   trailingIcon != null
-                      ? Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: trailingIcon,
+                      ? GestureDetector(
+                          onTap: onTrailingTap,
+                          behavior: HitTestBehavior.opaque,
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: trailingIcon,
+                          ),
                         )
                       : const SizedBox(width: 16.0),
                 ],

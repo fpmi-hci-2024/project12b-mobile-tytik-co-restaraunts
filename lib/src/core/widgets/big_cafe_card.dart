@@ -33,7 +33,7 @@ class BigCafeCard extends StatelessWidget {
     final theme = locator<CommonWidgetsTheme>();
     return GestureDetector(
       onTap: () {
-        appRouter..push(const CafeRoute());
+        appRouter.push(const CafeRoute());
       },
       child: Stack(
         children: [
