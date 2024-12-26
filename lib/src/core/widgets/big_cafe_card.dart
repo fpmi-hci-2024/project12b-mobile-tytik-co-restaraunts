@@ -32,19 +32,14 @@ class BigCafeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = locator<CommonWidgetsTheme>();
     return GestureDetector(
-      onTap: () {
-        appRouter.push(
-          CafeRoute(cafe: cafe),
-        );
-      },
+      onTap: onTap,
       child: Stack(
         children: [
           ImageWithBorder(
             height: height,
             width: width,
             borderRadius: 10,
-            url:
-                'https://img.pikbest.com/origin/09/70/06/222pIkbEsTrCh.jpg!sw800',
+            url: cafe.logoUrl,
           ),
           Positioned(
             bottom: 1,
@@ -64,6 +59,7 @@ class BigCafeCard extends StatelessWidget {
                   alignment: Alignment.center,
                   child: Text(
                     title ?? cafe.name,
+                    textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.w800,

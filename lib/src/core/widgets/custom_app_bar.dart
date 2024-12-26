@@ -66,7 +66,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 onTap: onLeadingTap,
                 behavior: HitTestBehavior.opaque,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8.0,
+                  ),
                   child: leadingIcon,
                 ),
               )
@@ -89,7 +91,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 onTap: onTrailingTap,
                 behavior: HitTestBehavior.opaque,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8.0,
+                  ),
                   child: trailingIcon,
                 ),
               )

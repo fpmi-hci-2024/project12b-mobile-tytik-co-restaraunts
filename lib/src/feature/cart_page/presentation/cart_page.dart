@@ -77,11 +77,7 @@ class CartPage extends StatelessWidget {
                           Align(
                             alignment: Alignment.topCenter,
                             child: CustomButton(
-                              text: const Cafe(
-                                id: '1',
-                                name: 'Cafe 1',
-                                rating: 5.0,
-                              ).name,
+                              text: cafeBloc.state.cafe.name,
                             ),
                           ),
                           const SizedBox(
@@ -121,17 +117,11 @@ class CartPage extends StatelessWidget {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         children: [
-                          const Align(
+                          Align(
                             alignment: Alignment.topCenter,
                             child: Padding(
-                              padding: EdgeInsets.symmetric(vertical: 20),
-                              child: BigCafeCard(
-                                cafe: Cafe(
-                                  id: '1',
-                                  name: 'Cafe 1',
-                                  rating: 5.0,
-                                ),
-                              ),
+                              padding: const EdgeInsets.symmetric(vertical: 20),
+                              child: BigCafeCard(cafe: cafeBloc.state.cafe),
                             ),
                           ),
                           Padding(

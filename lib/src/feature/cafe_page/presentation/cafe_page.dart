@@ -76,11 +76,7 @@ class CafePage extends StatelessWidget {
                         Align(
                           alignment: Alignment.topCenter,
                           child: CustomButton(
-                            text: const Cafe(
-                              id: '1',
-                              name: 'Cafe 1',
-                              rating: 5.0,
-                            ).name,
+                            text: state.cafe.name,
                           ),
                         ),
                         const SizedBox(
@@ -142,17 +138,13 @@ class CafePage extends StatelessWidget {
                   : ListView(
                       shrinkWrap: true,
                       children: [
-                        const Align(
+                        Align(
                           alignment: Alignment.topCenter,
                           child: Padding(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 20),
                             child: BigCafeCard(
-                              cafe: Cafe(
-                                id: '1',
-                                name: 'Cafe 1',
-                                rating: 5.0,
-                              ),
+                              cafe: state.cafe,
                             ),
                           ),
                         ),

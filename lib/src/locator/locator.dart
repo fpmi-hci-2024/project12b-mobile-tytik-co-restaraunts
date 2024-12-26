@@ -5,10 +5,15 @@ import 'package:monkey_delivery/src/feature/cafe_page/data/data_sources/mock_caf
 import 'package:monkey_delivery/src/feature/cafe_page/data/repositories/cafe_repositoty.dart';
 import 'package:monkey_delivery/src/feature/cafe_page/domain/data_sources/i_cafe_data_source.dart';
 import 'package:monkey_delivery/src/feature/cafe_page/domain/repositories/i_cafe_repository.dart';
+import 'package:monkey_delivery/src/feature/home_page/data/data_sources/mock_all_cafes_data_source.dart';
 
 import '../feature/cafe_page/presentation/bloc/cafe_bloc.dart';
 import '../feature/cafe_page/presentation/config/cafe_page_theme.dart';
 import '../feature/cart_page/presentation/config/cart_page_theme.dart';
+import '../feature/home_page/data/repositories/all_cafes_repository.dart';
+import '../feature/home_page/domain/data_sources/i_all_cafes_data_source.dart';
+import '../feature/home_page/domain/repositories/i_all_cafes_repository.dart';
+import '../feature/home_page/presentation/bloc/home_bloc.dart';
 import '../feature/home_page/presentation/config/home_page_theme.dart';
 
 final locator = GetIt.instance;
@@ -41,6 +46,19 @@ Future<void> configureCommonDependencies() async {
   locator.registerFactory<CafeBloc>(
     () => CafeBloc(
       locator<ICafeRepository>(),
+    ),
+  );
+  locator.registerSingleton<IAllCafesDataSource>(
+    MockAllCafesDataSource(),
+  );
+  locator.registerSingleton<IAllCafesRepository>(
+    AllCafesRepository(
+      locator<IAllCafesDataSource>(),
+    ),
+  );
+  locator.registerFactory<HomeBloc>(
+    () => HomeBloc(
+      locator<IAllCafesRepository>(),
     ),
   );
 }
