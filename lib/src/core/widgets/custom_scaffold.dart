@@ -9,11 +9,13 @@ class CustomScaffold extends StatelessWidget {
   final Widget body;
   final PreferredSizeWidget? appBar;
   final double webMaxWidth;
+  final bool resizeToAvoidBottomInset;
 
   const CustomScaffold({
     required this.body,
     this.appBar,
     this.webMaxWidth = 0,
+    this.resizeToAvoidBottomInset = false,
     super.key,
   });
 
@@ -27,7 +29,7 @@ class CustomScaffold extends StatelessWidget {
       child: Container(
         color: theme.primaryBackgroundColor,
         child: Scaffold(
-          resizeToAvoidBottomInset: false,
+          resizeToAvoidBottomInset: resizeToAvoidBottomInset,
           appBar: appBar,
           body: Center(
             child: ConstrainedBox(

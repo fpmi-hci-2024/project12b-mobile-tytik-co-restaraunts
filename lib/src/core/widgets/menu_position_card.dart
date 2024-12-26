@@ -14,6 +14,7 @@ class MenuPositionCard extends StatelessWidget {
   final double width;
   final VoidCallback? onTap;
   final Function(int) onCountChanged;
+  final bool showFullPrice;
 
   const MenuPositionCard({
     required this.menuPosition,
@@ -22,11 +23,16 @@ class MenuPositionCard extends StatelessWidget {
     this.width = 320,
     this.onTap,
     required this.onCountChanged,
+    this.showFullPrice = false,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = locator<CommonWidgetsTheme>();
+    var price = menuPosition.cost;
+    if (showFullPrice) {
+      price *= menuPosition.count;
+    }
     return GestureDetector(
       onTap: onTap,
       behavior: HitTestBehavior.opaque,
@@ -85,10 +91,13 @@ class MenuPositionCard extends StatelessWidget {
                                               ingredient
                                           ? '.'
                                           : ', '),
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                  ),
-                                )
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.copyWith(
+                                        color: Colors.black,
+                                      ),
+                                ),
                             ],
                           ),
                         ),
@@ -99,7 +108,7 @@ class MenuPositionCard extends StatelessWidget {
                     width: 5,
                   ),
                   Text(
-                    '${menuPosition.cost.toStringAsFixed(1)}\$',
+                    '${price.toStringAsFixed(1)}\$',
                   ),
                 ],
               ),

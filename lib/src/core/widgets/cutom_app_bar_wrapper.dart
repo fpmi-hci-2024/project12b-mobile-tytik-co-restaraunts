@@ -16,6 +16,7 @@ class CustomAppBarWrapper extends StatelessWidget
   final VoidCallback? onLeadingTap;
   final VoidCallback? onTrailingTap;
   final double webContentWidth;
+  final bool addGoBackButton;
 
   const CustomAppBarWrapper({
     super.key,
@@ -29,6 +30,7 @@ class CustomAppBarWrapper extends StatelessWidget
     this.webContentWidth = double.infinity,
     this.onLeadingTap,
     this.onTrailingTap,
+    this.addGoBackButton = false,
   });
 
   @override
@@ -45,6 +47,7 @@ class CustomAppBarWrapper extends StatelessWidget
         webContentWidth: webContentWidth,
         onLeadingTap: onLeadingTap,
         onTrailingTap: onTrailingTap,
+        addGoBackButton: addGoBackButton,
       );
     } else {
       return CustomAppBar(
@@ -57,6 +60,7 @@ class CustomAppBarWrapper extends StatelessWidget
         trailingIcon: trailingIcon,
         onLeadingTap: onLeadingTap,
         onTrailingTap: onTrailingTap,
+        addGoBackButton: addGoBackButton,
       );
     }
   }

@@ -12,6 +12,7 @@ class BigMenuPositionCard extends StatelessWidget {
   final double width;
   final VoidCallback? onTap;
   final Function(int) onCountChanged;
+  final bool showFullPrice;
 
   const BigMenuPositionCard({
     required this.menuPosition,
@@ -20,18 +21,21 @@ class BigMenuPositionCard extends StatelessWidget {
     this.width = 320,
     this.onTap,
     required this.onCountChanged,
+    this.showFullPrice = false,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = locator<CommonWidgetsTheme>();
+    var price = menuPosition.cost;
+    if (showFullPrice) {
+      price *= menuPosition.count;
+    }
     return GestureDetector(
       onTap: onTap,
       behavior: HitTestBehavior.opaque,
       child: Container(
         clipBehavior: Clip.antiAlias,
-        height: height,
-        width: width,
         decoration: BoxDecoration(
           color: Colors.transparent,
           borderRadius: BorderRadius.circular(10),
@@ -42,7 +46,7 @@ class BigMenuPositionCard extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(
-            vertical: 20,
+            vertical: 10,
             horizontal: 40,
           ),
           child: Column(
@@ -58,7 +62,7 @@ class BigMenuPositionCard extends StatelessWidget {
                 height: 8,
               ),
               Text(
-                '${menuPosition.cost.toStringAsFixed(1)}\$',
+                '${price.toStringAsFixed(1)}\$',
               ),
               const SizedBox(
                 height: 10,
@@ -83,10 +87,10 @@ class BigMenuPositionCard extends StatelessWidget {
                             (menuPosition.ingredients?.last == ingredient
                                 ? '.'
                                 : ', '),
-                        style: const TextStyle(
-                          color: Colors.black,
-                        ),
-                      )
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: Colors.black,
+                            ),
+                      ),
                   ],
                 ),
               ),

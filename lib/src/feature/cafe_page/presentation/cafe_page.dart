@@ -37,6 +37,7 @@ class CafePage extends StatelessWidget {
       const MenuPosition(
         name: 'Pepperoni Pizza',
         cost: 3.0,
+        count: 10,
         imageUrl:
             'https://www.simplyrecipes.com/thmb/KE6iMblr3R2Db6oE8HdyVsFSj2A=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__simply_recipes__uploads__2019__09__easy-pepperoni-pizza-lead-3-1024x682-583b275444104ef189d693a64df625da.jpg',
         ingredients: ['Tomato Sauce', 'Mozzarella', 'Pepperoni', 'Oregano'],
@@ -132,25 +133,19 @@ class CafePage extends StatelessWidget {
                   alignment: Alignment.topCenter,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
-                    child: GridView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: items.length,
-                      itemBuilder: (context, index) => BigMenuPositionCard(
-                        onCountChanged: (_) {},
-                        menuPosition: items[index],
-                        onTap: () => _showBottomSheet(
-                          context,
-                          items[index],
-                        ),
-                      ),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 20,
-                        mainAxisSpacing: 20,
-                        childAspectRatio: 1,
-                      ),
+                    child: Wrap(
+                      spacing: 20,
+                      runSpacing: 20,
+                      children: items.map((item) {
+                        return SizedBox(
+                          width: (660 - 60) / 2,
+                          height: 300,
+                          child: BigMenuPositionCard(
+                            onCountChanged: (_) {},
+                            menuPosition: item,
+                          ),
+                        );
+                      }).toList(),
                     ),
                   ),
                 ),
@@ -290,7 +285,7 @@ class CafePage extends StatelessWidget {
                     )
                   else
                     ItemsCounter(
-                      onValueChanged: (_) {},
+                      onValueChanged: (value) {},
                       value: position.count,
                     ),
                 ],

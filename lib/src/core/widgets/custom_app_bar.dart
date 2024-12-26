@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../../config/router/app_router.dart';
+
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String titleText;
   final TextStyle? titleStyle;
@@ -11,6 +13,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? trailingIcon;
   final VoidCallback? onLeadingTap;
   final VoidCallback? onTrailingTap;
+  final bool addGoBackButton;
 
   const CustomAppBar({
     super.key,
@@ -23,6 +26,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.trailingIcon,
     this.onLeadingTap,
     this.onTrailingTap,
+    this.addGoBackButton = false,
   });
 
   @override
@@ -42,6 +46,19 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            if (addGoBackButton)
+              GestureDetector(
+                onTap: () {
+                  appRouter.maybePop();
+                },
+                behavior: HitTestBehavior.opaque,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: const Icon(
+                    Icons.arrow_back,
+                  ),
+                ),
+              ),
             if (leadingIcon != null)
               GestureDetector(
                 onTap: onLeadingTap,

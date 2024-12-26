@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../config/router/app_router.dart';
+
 class CustomWebAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String titleText;
   final TextStyle? titleStyle;
@@ -11,6 +13,7 @@ class CustomWebAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? onLeadingTap;
   final VoidCallback? onTrailingTap;
   final double webContentWidth;
+  final bool addGoBackButton;
 
   const CustomWebAppBar({
     super.key,
@@ -24,6 +27,7 @@ class CustomWebAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.webContentWidth = double.infinity,
     this.onLeadingTap,
     this.onTrailingTap,
+    this.addGoBackButton = false,
   });
 
   @override
@@ -42,6 +46,19 @@ class CustomWebAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  if (addGoBackButton)
+                    GestureDetector(
+                      onTap: () {
+                        appRouter.maybePop();
+                      },
+                      behavior: HitTestBehavior.opaque,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: const Icon(
+                          Icons.arrow_back,
+                        ),
+                      ),
+                    ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Text(
