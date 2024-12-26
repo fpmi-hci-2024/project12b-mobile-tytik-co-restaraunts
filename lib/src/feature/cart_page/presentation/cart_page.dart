@@ -27,6 +27,7 @@ class CartPage extends StatelessWidget {
 
     final items = <MenuPosition>[
       const MenuPosition(
+        id: '1',
         name: 'Margherita Pizza',
         cost: 3.5,
         imageUrl:
@@ -35,6 +36,7 @@ class CartPage extends StatelessWidget {
         type: MenuPositionType.food,
       ),
       const MenuPosition(
+        id: '2',
         name: 'Pepperoni Pizza',
         cost: 3.0,
         count: 10,
@@ -44,6 +46,7 @@ class CartPage extends StatelessWidget {
         type: MenuPositionType.food,
       ),
       const MenuPosition(
+        id: '3',
         name: 'Caesar Salad',
         cost: 5.5,
         count: 7,
@@ -59,6 +62,7 @@ class CartPage extends StatelessWidget {
         type: MenuPositionType.food,
       ),
       const MenuPosition(
+        id: '4',
         name: 'Cola',
         cost: 10.5,
         count: 7,
@@ -67,6 +71,7 @@ class CartPage extends StatelessWidget {
         type: MenuPositionType.drink,
       ),
       const MenuPosition(
+        id: '5',
         name: 'Lemonade',
         cost: 0.5,
         imageUrl:
@@ -75,6 +80,7 @@ class CartPage extends StatelessWidget {
         type: MenuPositionType.drink,
       ),
       const MenuPosition(
+        id: '6',
         name: 'Iced Tea',
         cost: 5.0,
         imageUrl:

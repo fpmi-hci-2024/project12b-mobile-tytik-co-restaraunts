@@ -10,4 +10,10 @@ class Cafe {
     this.rating,
     this.logoUrl,
   });
+
+  const Cafe.empty()
+      : id = '',
+        name = '',
+        rating = null,
+        logoUrl = null;
 }

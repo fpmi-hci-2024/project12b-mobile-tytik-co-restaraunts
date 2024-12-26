@@ -1,7 +1,12 @@
 import 'package:get_it/get_it.dart';
 import 'package:monkey_delivery/src/core/widgets/config/common_widgets_theme.dart';
 import 'package:monkey_delivery/src/feature/auth_page/presentation/config/auth_page_theme.dart';
+import 'package:monkey_delivery/src/feature/cafe_page/data/data_sources/mock_cafe_data_source.dart';
+import 'package:monkey_delivery/src/feature/cafe_page/data/repositories/cafe_repositoty.dart';
+import 'package:monkey_delivery/src/feature/cafe_page/domain/data_sources/i_cafe_data_source.dart';
+import 'package:monkey_delivery/src/feature/cafe_page/domain/repositories/i_cafe_repository.dart';
 
+import '../feature/cafe_page/presentation/bloc/cafe_bloc.dart';
 import '../feature/cafe_page/presentation/config/cafe_page_theme.dart';
 import '../feature/cart_page/presentation/config/cart_page_theme.dart';
 import '../feature/home_page/presentation/config/home_page_theme.dart';
@@ -24,5 +29,18 @@ Future<void> configureCommonDependencies() async {
   );
   locator.registerSingleton<CartTheme>(
     CartTheme(),
+  );
+  locator.registerSingleton<ICafeDataSource>(
+    MockCafeDataSource(),
+  );
+  locator.registerSingleton<ICafeRepository>(
+    CafeRepository(
+      locator<ICafeDataSource>(),
+    ),
+  );
+  locator.registerFactory<CafeBloc>(
+    () => CafeBloc(
+      locator<ICafeRepository>(),
+    ),
   );
 }

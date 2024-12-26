@@ -16,9 +16,13 @@ abstract class _$AppRouter extends RootStackRouter {
   @override
   final Map<String, PageFactory> pagesMap = {
     CafeRoute.name: (routeData) {
+      final args = routeData.argsAs<CafeRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const CafePage(),
+        child: CafePage(
+          cafe: args.cafe,
+          key: args.key,
+        ),
       );
     },
     CartRoute.name: (routeData) {
@@ -50,16 +54,39 @@ abstract class _$AppRouter extends RootStackRouter {
 
 /// generated route for
 /// [CafePage]
-class CafeRoute extends PageRouteInfo<void> {
-  const CafeRoute({List<PageRouteInfo>? children})
-      : super(
+class CafeRoute extends PageRouteInfo<CafeRouteArgs> {
+  CafeRoute({
+    required Cafe cafe,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           CafeRoute.name,
+          args: CafeRouteArgs(
+            cafe: cafe,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'CafeRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<CafeRouteArgs> page = PageInfo<CafeRouteArgs>(name);
+}
+
+class CafeRouteArgs {
+  const CafeRouteArgs({
+    required this.cafe,
+    this.key,
+  });
+
+  final Cafe cafe;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'CafeRouteArgs{cafe: $cafe, key: $key}';
+  }
 }
 
 /// generated route for
