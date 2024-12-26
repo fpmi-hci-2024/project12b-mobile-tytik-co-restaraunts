@@ -52,19 +52,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   appRouter.maybePop();
                 },
                 behavior: HitTestBehavior.opaque,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: const Icon(
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Icon(
                     Icons.arrow_back,
                   ),
                 ),
-              ),
+              )
+            else
+              const SizedBox(width: 16.0),
             if (leadingIcon != null)
               GestureDetector(
                 onTap: onLeadingTap,
                 behavior: HitTestBehavior.opaque,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: leadingIcon,
                 ),
               )
@@ -81,12 +83,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 textAlign: TextAlign.center,
               ),
             ),
+            const SizedBox(width: 16.0),
             if (trailingIcon != null)
               GestureDetector(
                 onTap: onTrailingTap,
                 behavior: HitTestBehavior.opaque,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: trailingIcon,
                 ),
               )
