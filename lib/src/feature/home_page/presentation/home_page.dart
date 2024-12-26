@@ -118,7 +118,6 @@ class HomePage extends StatelessWidget {
                           horizontal: 20,
                         ),
                         child: BigCafeCard(
-                          height: state.query.isEmpty ? 300 : 80,
                           cafe: state.bestDaily,
                           title: 'Top Daily',
                           onTap: () {
