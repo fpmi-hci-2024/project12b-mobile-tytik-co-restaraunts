@@ -103,6 +103,19 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                     ),
+                    if (state.showSearchResults)
+                      const Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20,
+                        ),
+                        child: Text(
+                          'Didn’t find your favourite cafe? Contact them and ask to join our service!',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ),
                   ],
                 )
               : ListView(
@@ -171,6 +184,19 @@ class HomePage extends StatelessWidget {
                         itemCount: items.length,
                       ),
                     ),
+                    if (state.showSearchResults)
+                      const Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20,
+                        ),
+                        child: Text(
+                          'Didn’t find your favourite cafe? Contact them and ask to join our service!',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ),
                   ],
                 );
         }),
