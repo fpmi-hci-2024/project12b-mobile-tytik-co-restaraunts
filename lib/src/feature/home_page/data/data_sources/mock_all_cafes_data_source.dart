@@ -4,8 +4,17 @@ import 'package:monkey_delivery/src/feature/home_page/domain/data_sources/i_all_
 class MockAllCafesDataSource implements IAllCafesDataSource {
   @override
   Future<List<Cafe>> findCafes(String query) async {
-    // TODO: implement findCafes
-    throw UnimplementedError();
+    await Future.delayed(
+      const Duration(milliseconds: 300),
+    );
+    return [
+      const Cafe(
+        id: '0',
+        logoUrl: 'https://content.wepik.com/statics/68342939/preview-page0.jpg',
+        name: 'Cafe 0',
+        rating: 0.5,
+      ),
+    ];
   }
 
   @override

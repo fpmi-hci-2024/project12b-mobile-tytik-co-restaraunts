@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '../../../../core/domain/entities/cafe.dart';
 import '../../domain/repositories/i_all_cafes_repository.dart';
@@ -12,6 +13,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   HomeBloc(this._allCafesRepository) : super(const HomeState()) {
     on<InitHomePage>(_onInitHomePage);
+    on<QueryChanged>(
+      _onQueryChanged,
+      transformer: _debounce(
+        const Duration(milliseconds: 500),
+      ),
+    );
   }
 
   Future<void> _onInitHomePage(
@@ -28,5 +35,29 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         pageLoaded: true,
       ),
     );
+  }
+
+  Future<void> _onQueryChanged(
+    QueryChanged event,
+    Emitter<HomeState> emit,
+  ) async {
+    bool showSearchResults = false;
+    List<Cafe>? results;
+    if (event.newQuery.isNotEmpty) {
+      showSearchResults = true;
+      results = await _allCafesRepository.findCafes(
+        event.newQuery,
+      );
+    }
+    emit(
+      state.copyWith(
+        searchResultCafes: results,
+        showSearchResults: showSearchResults,
+      ),
+    );
+  }
+
+  EventTransformer<E> _debounce<E>(Duration duration) {
+    return (events, mapper) => events.debounceTime(duration).switchMap(mapper);
   }
 }

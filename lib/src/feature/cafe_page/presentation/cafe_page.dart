@@ -58,8 +58,10 @@ class CafePage extends StatelessWidget {
           body: BlocBuilder<CafeBloc, CafeState>(
             builder: (context, state) {
               if (!state.dataLoaded) {
-                return CircularProgressIndicator(
-                  color: theme.primaryBorderColor,
+                return Center(
+                  child: CircularProgressIndicator(
+                    color: theme.primaryBorderColor,
+                  ),
                 );
               }
               final bloc = context.read<CafeBloc>();

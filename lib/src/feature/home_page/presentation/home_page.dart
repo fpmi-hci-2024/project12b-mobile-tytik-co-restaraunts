@@ -46,10 +46,13 @@ class HomePage extends StatelessWidget {
               ? state.searchResultCafes
               : state.allCafes;
           if (!state.pageLoaded) {
-            return CircularProgressIndicator(
-              color: theme.primaryBorderColor,
+            return Center(
+              child: CircularProgressIndicator(
+                color: theme.primaryBorderColor,
+              ),
             );
           }
+          final bloc = context.read<HomeBloc>();
           return kIsWeb
               ? ListView(
                   shrinkWrap: true,
@@ -110,6 +113,7 @@ class HomePage extends StatelessWidget {
                           horizontal: 20,
                         ),
                         child: BigCafeCard(
+                          height: state.query.isEmpty ? 300 : 80,
                           cafe: state.bestDaily,
                           title: 'Top Daily',
                           onTap: () {
@@ -122,12 +126,17 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 40, vertical: 15),
                       child: CustomTextField(
                         placeholderText: 'Search',
                         width: 200,
+                        onChanged: (String value) {
+                          bloc.add(
+                            QueryChanged(value),
+                          );
+                        },
                       ),
                     ),
                     Divider(

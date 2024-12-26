@@ -7,3 +7,9 @@ abstract class HomeEvent {
 class InitHomePage extends HomeEvent {
   const InitHomePage();
 }
+
+class QueryChanged extends HomeEvent {
+  final String newQuery;
+
+  const QueryChanged(this.newQuery);
+}

@@ -31,13 +31,11 @@ class CustomScaffold extends StatelessWidget {
         child: Scaffold(
           resizeToAvoidBottomInset: resizeToAvoidBottomInset,
           appBar: appBar,
-          body: Center(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                maxWidth: kIsWeb ? webMaxWidth : double.infinity,
-              ),
-              child: body,
+          body: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: kIsWeb ? webMaxWidth : double.infinity,
             ),
+            child: body,
           ),
           backgroundColor: Colors.transparent,
         ),

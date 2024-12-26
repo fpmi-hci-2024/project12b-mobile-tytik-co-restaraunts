@@ -31,45 +31,52 @@ class BigCafeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = locator<CommonWidgetsTheme>();
-    return GestureDetector(
-      onTap: onTap,
-      child: Stack(
-        children: [
-          ImageWithBorder(
-            height: height,
-            width: width,
-            borderRadius: 10,
-            url: cafe.logoUrl,
-          ),
-          Positioned(
-            bottom: 1,
-            left: 1,
-            child: Padding(
-              padding: const EdgeInsets.only(
-                bottom: kIsWeb ? 20 : 0,
-              ),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: const Color(0xffE9E2D6).withAlpha(188),
+    return AnimatedContainer(
+      height: height,
+      width: width,
+      duration: Duration(
+        seconds: 1,
+      ),
+      child: GestureDetector(
+        onTap: onTap,
+        child: Stack(
+          children: [
+            ImageWithBorder(
+              height: height,
+              width: width,
+              borderRadius: 10,
+              url: cafe.logoUrl,
+            ),
+            Positioned(
+              bottom: 1,
+              left: 1,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  bottom: kIsWeb ? 20 : 0,
                 ),
-                width: width - 2,
-                height: subsectionHeight,
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    title ?? cafe.name,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w800,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: const Color(0xffE9E2D6).withAlpha(188),
+                  ),
+                  width: width - 2,
+                  height: subsectionHeight,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      title ?? cafe.name,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.w800,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
