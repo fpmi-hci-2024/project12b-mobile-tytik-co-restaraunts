@@ -57,16 +57,21 @@ class HomePage extends StatelessWidget {
               ? ListView(
                   shrinkWrap: true,
                   children: [
-                    const Align(
+                    Align(
                       alignment: Alignment.topCenter,
                       child: Padding(
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                           top: 20,
                           right: 40,
                           left: 20,
                         ),
                         child: CustomTextField(
                           placeholderText: 'Search',
+                          onChanged: (String value) {
+                            bloc.add(
+                              QueryChanged(value),
+                            );
+                          },
                         ),
                       ),
                     ),
