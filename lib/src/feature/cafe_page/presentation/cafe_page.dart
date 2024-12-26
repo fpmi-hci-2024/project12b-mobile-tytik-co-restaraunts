@@ -177,6 +177,7 @@ class CafePage extends StatelessWidget {
       ),
       builder: (context) {
         return Container(
+          width: double.infinity,
           padding: const EdgeInsets.all(16.0),
           decoration: BoxDecoration(
             color: theme.bottomSheetColor,
