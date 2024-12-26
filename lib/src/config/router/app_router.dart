@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:monkey_delivery/src/feature/cart_page/presentation/cart_page.dart';
 
 import '../../core/domain/entities/cafe.dart';
+import '../../feature/auth_page/presentation/new_sign_in_page.dart';
 import '../../feature/auth_page/presentation/register_page.dart';
 import '../../feature/auth_page/presentation/sign_in_page.dart';
 import '../../feature/cafe_page/presentation/bloc/cafe_bloc.dart';
@@ -20,11 +22,17 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           page: HomeRoute.page,
           path: '/home',
+          initial: kIsWeb,
         ),
         AutoRoute(
           page: SignInRoute.page,
           path: '/sign_in',
-          initial: true,
+          //initial: true,
+        ),
+        AutoRoute(
+          page: NewSignInRoute.page,
+          path: '/info',
+          initial: !kIsWeb,
         ),
         AutoRoute(
           page: RegisterRoute.page,

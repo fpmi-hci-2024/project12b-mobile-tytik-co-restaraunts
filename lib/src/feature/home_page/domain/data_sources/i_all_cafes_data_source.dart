@@ -1,6 +1,6 @@
 import '../../../../core/domain/entities/cafe.dart';
 
-abstract class IAllCafesDataSource {
+abstract interface class IAllCafesDataSource {
   Future<List<Cafe>> getAllCafes();
 
   Future<List<Cafe>> findCafes(String query);

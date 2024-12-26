@@ -1,6 +1,6 @@
 import '../../../../core/domain/entities/cafe.dart';
 
-abstract class IAllCafesRepository {
+abstract interface class IAllCafesRepository {
   Future<List<Cafe>> getAllCafes();
 
   Future<List<Cafe>> findCafes(String query);

@@ -153,6 +153,12 @@ class CartPage extends StatelessWidget {
                         ],
                       ),
                 const CustomTextField(
+                  placeholderText: 'Enter You Name',
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const CustomTextField(
                   placeholderText: 'Enter You Address',
                 ),
                 const SizedBox(

@@ -1,12 +1,17 @@
 import 'package:get_it/get_it.dart';
 import 'package:monkey_delivery/src/core/widgets/config/common_widgets_theme.dart';
+import 'package:monkey_delivery/src/feature/auth_page/domain/data_sources/i_user_information_data_source.dart';
+import 'package:monkey_delivery/src/feature/auth_page/domain/repositories/i_user_information_repository.dart';
 import 'package:monkey_delivery/src/feature/auth_page/presentation/config/auth_page_theme.dart';
+import 'package:monkey_delivery/src/feature/auth_page/presentation/new_sign_in_bloc/new_sign_in_bloc.dart';
 import 'package:monkey_delivery/src/feature/cafe_page/data/data_sources/mock_cafe_data_source.dart';
 import 'package:monkey_delivery/src/feature/cafe_page/data/repositories/cafe_repositoty.dart';
 import 'package:monkey_delivery/src/feature/cafe_page/domain/data_sources/i_cafe_data_source.dart';
 import 'package:monkey_delivery/src/feature/cafe_page/domain/repositories/i_cafe_repository.dart';
 import 'package:monkey_delivery/src/feature/home_page/data/data_sources/mock_all_cafes_data_source.dart';
 
+import '../feature/auth_page/data/data_sources/user_information_data_source.dart';
+import '../feature/auth_page/data/repositories/user_information_repository.dart';
 import '../feature/cafe_page/presentation/bloc/cafe_bloc.dart';
 import '../feature/cafe_page/presentation/config/cafe_page_theme.dart';
 import '../feature/cart_page/presentation/config/cart_page_theme.dart';
@@ -59,6 +64,19 @@ Future<void> configureCommonDependencies() async {
   locator.registerFactory<HomeBloc>(
     () => HomeBloc(
       locator<IAllCafesRepository>(),
+    ),
+  );
+  locator.registerSingleton<IUserInformationDataSource>(
+    UserInformationDataSource(),
+  );
+  locator.registerSingleton<IUserInformationRepository>(
+    UserInformationRepository(
+      locator<IUserInformationDataSource>(),
+    ),
+  );
+  locator.registerSingleton<NewSignInBloc>(
+    NewSignInBloc(
+      locator<IUserInformationRepository>(),
     ),
   );
 }
