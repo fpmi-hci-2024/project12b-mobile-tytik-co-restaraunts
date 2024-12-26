@@ -26,9 +26,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     CartRoute.name: (routeData) {
+      final args = routeData.argsAs<CartRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const CartPage(),
+        child: CartPage(
+          cafeBloc: args.cafeBloc,
+          key: args.key,
+        ),
       );
     },
     HomeRoute.name: (routeData) {
@@ -91,16 +95,39 @@ class CafeRouteArgs {
 
 /// generated route for
 /// [CartPage]
-class CartRoute extends PageRouteInfo<void> {
-  const CartRoute({List<PageRouteInfo>? children})
-      : super(
+class CartRoute extends PageRouteInfo<CartRouteArgs> {
+  CartRoute({
+    required CafeBloc cafeBloc,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           CartRoute.name,
+          args: CartRouteArgs(
+            cafeBloc: cafeBloc,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'CartRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<CartRouteArgs> page = PageInfo<CartRouteArgs>(name);
+}
+
+class CartRouteArgs {
+  const CartRouteArgs({
+    required this.cafeBloc,
+    this.key,
+  });
+
+  final CafeBloc cafeBloc;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'CartRouteArgs{cafeBloc: $cafeBloc, key: $key}';
+  }
 }
 
 /// generated route for

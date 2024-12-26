@@ -29,7 +29,7 @@ class CustomScaffold extends StatelessWidget {
       child: Container(
         color: theme.primaryBackgroundColor,
         child: Scaffold(
-          resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+          resizeToAvoidBottomInset: false,
           appBar: appBar,
           body: Center(
             child: ConstrainedBox(

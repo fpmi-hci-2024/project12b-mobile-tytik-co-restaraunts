@@ -1,4 +1,3 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -29,179 +28,192 @@ class CafePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = locator<CafeTheme>();
-    return CustomScaffold(
-      appBar: CustomAppBarWrapper(
-        addGoBackButton: true,
-        titleText: theme.appName,
-        height: 50,
-        leadingIcon: const Icon(
-          Icons.settings,
-        ),
-        trailingIcon: const Icon(
-          Icons.shopping_cart,
-        ),
-        onTrailingTap: () {
-          context.router.push(
-            const CartRoute(),
-          );
-        },
-        webContentWidth: 660,
-      ),
-      webMaxWidth: 660,
-      body: BlocProvider<CafeBloc>(
-        create: (_) => locator<CafeBloc>()
-          ..add(
-            InitCafeData(
-              cafe,
-            ),
+    return BlocProvider<CafeBloc>(
+      create: (_) => locator<CafeBloc>()
+        ..add(
+          InitCafeData(
+            cafe,
           ),
-        child: BlocBuilder<CafeBloc, CafeState>(
-          builder: (context, state) {
-            if (!state.dataLoaded) {
-              return CircularProgressIndicator(
-                color: theme.primaryBorderColor,
+        ),
+      child: Builder(builder: (context) {
+        return CustomScaffold(
+          appBar: CustomAppBarWrapper(
+            addGoBackButton: true,
+            titleText: theme.appName,
+            height: 50,
+            leadingIcon: const Icon(
+              Icons.settings,
+            ),
+            trailingIcon: const Icon(
+              Icons.shopping_cart,
+            ),
+            onTrailingTap: () {
+              context.router.push(
+                CartRoute(cafeBloc: context.read<CafeBloc>()),
               );
-            }
-            final bloc = context.read<CafeBloc>();
-            final itemsToShow = state.menu
-                .where((element) => element.type == state.selectedType)
-                .toList();
-            return kIsWeb
-                ? ListView(
-                    shrinkWrap: true,
-                    children: [
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: CustomButton(
-                          text: const Cafe(
-                            id: '1',
-                            name: 'Cafe 1',
-                            rating: 5.0,
-                          ).name,
+            },
+            webContentWidth: 660,
+          ),
+          webMaxWidth: 660,
+          body: BlocBuilder<CafeBloc, CafeState>(
+            builder: (context, state) {
+              if (!state.dataLoaded) {
+                return CircularProgressIndicator(
+                  color: theme.primaryBorderColor,
+                );
+              }
+              final bloc = context.read<CafeBloc>();
+              final itemsToShow = state.menu
+                  .where((element) => element.type == state.selectedType)
+                  .toList();
+              return kIsWeb
+                  ? ListView(
+                      shrinkWrap: true,
+                      children: [
+                        const SizedBox(
+                          height: 20,
                         ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20,
-                        ),
-                        child: CustomSwitch(
-                          leftName: 'Food',
-                          rightName: 'Drinks',
-                          onTap: (int index) {
-                            if (index == 0) {
-                              bloc.add(
-                                const ChangePositionType(MenuPositionType.food),
-                              );
-                            } else {
-                              bloc.add(
-                                const ChangePositionType(
-                                    MenuPositionType.drink),
-                              );
-                            }
-                          },
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 20),
-                          child: Wrap(
-                            spacing: 20,
-                            runSpacing: 20,
-                            children: itemsToShow.map((item) {
-                              return SizedBox(
-                                width: (660 - 60) / 2,
-                                height: 300,
-                                child: BigMenuPositionCard(
-                                  onCountChanged: (_) {},
-                                  menuPosition: item,
-                                  onTap: () => _showBottomSheet(context, item),
-                                ),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
-                : ListView(
-                    shrinkWrap: true,
-                    children: [
-                      const Align(
-                        alignment: Alignment.topCenter,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 20),
-                          child: BigCafeCard(
-                            cafe: Cafe(
+                        Align(
+                          alignment: Alignment.topCenter,
+                          child: CustomButton(
+                            text: const Cafe(
                               id: '1',
                               name: 'Cafe 1',
                               rating: 5.0,
-                            ),
+                            ).name,
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20,
+                        const SizedBox(
+                          height: 20,
                         ),
-                        child: CustomSwitch(
-                          leftName: 'Food',
-                          rightName: 'Drinks',
-                          onTap: (int index) {
-                            if (index == 0) {
-                              bloc.add(
-                                const ChangePositionType(MenuPositionType.food),
-                              );
-                            } else {
-                              bloc.add(
-                                const ChangePositionType(
-                                    MenuPositionType.drink),
-                              );
-                            }
-                          },
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 25,
-                        ),
-                        child: ListView.separated(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) => MenuPositionCard(
-                            onCountChanged: (int count) {
-                              context.read<CafeBloc>().add(
-                                    ChangeMenuPositionCount(
-                                      id: itemsToShow[index].id,
-                                      newCount: count,
-                                    ),
-                                  );
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                          ),
+                          child: CustomSwitch(
+                            leftName: 'Food',
+                            rightName: 'Drinks',
+                            onTap: (int index) {
+                              if (index == 0) {
+                                bloc.add(
+                                  const ChangePositionType(
+                                      MenuPositionType.food),
+                                );
+                              } else {
+                                bloc.add(
+                                  const ChangePositionType(
+                                      MenuPositionType.drink),
+                                );
+                              }
                             },
-                            menuPosition: itemsToShow[index],
-                            onTap: () async => await _showBottomSheet(
-                              context,
-                              itemsToShow[index],
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.topCenter,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: Wrap(
+                              spacing: 20,
+                              runSpacing: 20,
+                              children: itemsToShow.map((item) {
+                                return SizedBox(
+                                  width: (660 - 60) / 2,
+                                  height: 300,
+                                  child: BigMenuPositionCard(
+                                    onCountChanged: (int count) {
+                                      context.read<CafeBloc>().add(
+                                            ChangeMenuPositionCount(
+                                              id: item.id,
+                                              newCount: count,
+                                            ),
+                                          );
+                                    },
+                                    menuPosition: item,
+                                    onTap: () =>
+                                        _showBottomSheet(context, item),
+                                  ),
+                                );
+                              }).toList(),
                             ),
                           ),
-                          separatorBuilder: (context, index) => const SizedBox(
-                            height: 25,
-                          ),
-                          itemCount: itemsToShow.length,
                         ),
-                      ),
-                    ],
-                  );
-          },
-        ),
-      ),
+                      ],
+                    )
+                  : ListView(
+                      shrinkWrap: true,
+                      children: [
+                        const Align(
+                          alignment: Alignment.topCenter,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 20),
+                            child: BigCafeCard(
+                              cafe: Cafe(
+                                id: '1',
+                                name: 'Cafe 1',
+                                rating: 5.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                          ),
+                          child: CustomSwitch(
+                            leftName: 'Food',
+                            rightName: 'Drinks',
+                            onTap: (int index) {
+                              if (index == 0) {
+                                bloc.add(
+                                  const ChangePositionType(
+                                      MenuPositionType.food),
+                                );
+                              } else {
+                                bloc.add(
+                                  const ChangePositionType(
+                                      MenuPositionType.drink),
+                                );
+                              }
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 25,
+                          ),
+                          child: ListView.separated(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) => MenuPositionCard(
+                              onCountChanged: (int count) {
+                                context.read<CafeBloc>().add(
+                                      ChangeMenuPositionCount(
+                                        id: itemsToShow[index].id,
+                                        newCount: count,
+                                      ),
+                                    );
+                              },
+                              menuPosition: itemsToShow[index],
+                              onTap: () async => await _showBottomSheet(
+                                context,
+                                itemsToShow[index],
+                              ),
+                            ),
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(
+                              height: 25,
+                            ),
+                            itemCount: itemsToShow.length,
+                          ),
+                        ),
+                      ],
+                    );
+            },
+          ),
+        );
+      }),
     );
   }
 
@@ -210,7 +222,7 @@ class CafePage extends StatelessWidget {
     MenuPosition position,
   ) async {
     final theme = locator<CafeTheme>();
-    final cafeBloc = context.read<CafeBloc>(); // Получаем текущий блок
+    final cafeBloc = context.read<CafeBloc>();
     await showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -220,7 +232,6 @@ class CafePage extends StatelessWidget {
         ),
       ),
       builder: (bottomSheetContext) {
-        // Передаём текущий блок в BottomSheet
         return BlocProvider.value(
           value: cafeBloc,
           child: BlocBuilder<CafeBloc, CafeState>(
