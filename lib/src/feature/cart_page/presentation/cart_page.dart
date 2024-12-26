@@ -61,6 +61,7 @@ class CartPage extends StatelessWidget {
       const MenuPosition(
         name: 'Cola',
         cost: 10.5,
+        count: 7,
         imageUrl:
             'https://aqomi.com/wp-content/uploads/2024/02/Coca_Cola_Case_Study_How_a_Failing_Brand_Revived_Its_Fortunes_with_a_Bold_New_Strategy_11.webp',
         type: MenuPositionType.drink,

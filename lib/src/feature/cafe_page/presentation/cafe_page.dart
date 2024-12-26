@@ -83,6 +83,7 @@ class CafePage extends StatelessWidget {
     ];
     return CustomScaffold(
       appBar: CustomAppBarWrapper(
+        addGoBackButton: true,
         titleText: theme.appName,
         height: 50,
         leadingIcon: const Icon(
@@ -143,6 +144,7 @@ class CafePage extends StatelessWidget {
                           child: BigMenuPositionCard(
                             onCountChanged: (_) {},
                             menuPosition: item,
+                            onTap: () => _showBottomSheet(context, item),
                           ),
                         );
                       }).toList(),
