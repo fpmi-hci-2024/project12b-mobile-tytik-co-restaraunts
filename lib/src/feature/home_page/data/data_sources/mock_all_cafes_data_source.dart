@@ -8,11 +8,26 @@ class MockAllCafesDataSource implements IAllCafesDataSource {
       const Duration(milliseconds: 300),
     );
     return [
-      const Cafe(
-        id: '0',
-        logoUrl: 'https://content.wepik.com/statics/68342939/preview-page0.jpg',
-        name: 'Cafe 0',
-        rating: 0.5,
+      Cafe(
+        id: '01',
+        logoUrl:
+            'https://marketplace.canva.com/EAFTviDnQRM/1/0/1600w/canva-retro-and-vintage-coffee-shop-badge-logo-AkT-50lhy8M.jpg',
+        name: '$query 1',
+        rating: 4.8,
+      ),
+      Cafe(
+        id: '02',
+        logoUrl:
+            'https://images.scalebranding.com/classic-cafe-symbol-logo-cc352ffe-2b2c-477c-a2ac-362029e3cc4c.jpg',
+        name: '$query 2',
+        rating: 3.6,
+      ),
+      Cafe(
+        id: '03',
+        logoUrl:
+            'https://marketplace.canva.com/EAGEN1kgOec/1/0/1600w/canva-brown-beige-vintage-milk-tea-circle-logo-JLPnU4LfUg0.jpg',
+        name: '$query 3',
+        rating: 2.2,
       ),
     ];
   }
