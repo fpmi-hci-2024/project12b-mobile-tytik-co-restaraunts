@@ -8,6 +8,7 @@ import 'package:monkey_delivery/src/feature/cafe_page/data/data_sources/mock_caf
 import 'package:monkey_delivery/src/feature/cafe_page/data/repositories/cafe_repositoty.dart';
 import 'package:monkey_delivery/src/feature/cafe_page/domain/data_sources/i_cafe_data_source.dart';
 import 'package:monkey_delivery/src/feature/cafe_page/domain/repositories/i_cafe_repository.dart';
+import 'package:monkey_delivery/src/feature/cart_page/presentation/bloc/cart_bloc.dart';
 import 'package:monkey_delivery/src/feature/home_page/data/data_sources/mock_all_cafes_data_source.dart';
 
 import '../feature/auth_page/data/data_sources/user_information_data_source.dart';
@@ -76,6 +77,11 @@ Future<void> configureCommonDependencies() async {
   );
   locator.registerSingleton<NewSignInBloc>(
     NewSignInBloc(
+      locator<IUserInformationRepository>(),
+    ),
+  );
+  locator.registerFactory<CartBloc>(
+    () => CartBloc(
       locator<IUserInformationRepository>(),
     ),
   );

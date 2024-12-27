@@ -13,9 +13,6 @@ class UserInformationDataSource implements IUserInformationDataSource {
 
     final String? userInfoString = prefs.getString(_userInformationKey);
 
-    print(
-        '::IK:: UserInformationDataSource.getUserInformation ${userInfoString}');
-
     if (userInfoString == null) {
       return const UserInformation.empty();
     }
