@@ -9,7 +9,7 @@ class DioService implements IDioService {
 
   @override
   Future<Map<String, dynamic>> getRequest(String url) async {
-    final response = await _dio.get('http://localhost:8000/$url');
+    final response = await _dio.get('http://10.0.2.2:8000/$url');
     return response.data as Map<String, dynamic>;
   }
 }

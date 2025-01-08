@@ -19,6 +19,7 @@ import '../feature/auth_page/data/repositories/user_information_repository.dart'
 import '../feature/cafe_page/presentation/bloc/cafe_bloc.dart';
 import '../feature/cafe_page/presentation/config/cafe_page_theme.dart';
 import '../feature/cart_page/presentation/config/cart_page_theme.dart';
+import '../feature/home_page/data/data_sources/all_cafes_data_source.dart';
 import '../feature/home_page/data/repositories/all_cafes_repository.dart';
 import '../feature/home_page/domain/data_sources/i_all_cafes_data_source.dart';
 import '../feature/home_page/domain/repositories/i_all_cafes_repository.dart';
@@ -64,7 +65,9 @@ Future<void> configureCommonDependencies() async {
     ),
   );
   locator.registerSingleton<IAllCafesDataSource>(
-    MockAllCafesDataSource(),
+    AllCafesDataSource(
+      locator(),
+    ),
   );
   locator.registerSingleton<IAllCafesRepository>(
     AllCafesRepository(

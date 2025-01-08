@@ -1,3 +1,5 @@
+import 'dart:math';
+
 class Cafe {
   final String logoUrl;
   final String name;
@@ -16,4 +18,13 @@ class Cafe {
         name = '',
         rating = null,
         logoUrl = '';
+
+  factory Cafe.fromJson(Map<String, dynamic> json) {
+    return Cafe(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      rating: 5.0,
+      logoUrl: json['logo_url'] as String,
+    );
+  }
 }
