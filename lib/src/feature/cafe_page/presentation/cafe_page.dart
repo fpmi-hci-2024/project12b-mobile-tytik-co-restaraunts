@@ -41,9 +41,9 @@ class CafePage extends StatelessWidget {
             addGoBackButton: true,
             titleText: theme.appName,
             height: 50,
-            leadingIcon: const Icon(
+            /*leadingIcon: const Icon(
               Icons.settings,
-            ),
+            ),*/
             trailingIcon: const Icon(
               Icons.shopping_cart,
             ),

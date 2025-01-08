@@ -32,12 +32,17 @@ class HomePage extends StatelessWidget {
         appBar: CustomAppBarWrapper(
           titleText: theme.appName,
           height: 50,
-          leadingIcon: const Icon(
+          /*leadingIcon: const Icon(
             Icons.settings,
-          ),
-          trailingIcon: const Icon(
-            Icons.person,
-          ),
+          ),*/
+          trailingIcon: kIsWeb
+              ? null
+              : const Icon(
+                  Icons.person,
+                ),
+          onTrailingTap: () {
+            appRouter.push(const HistoryRoute());
+          },
           webContentWidth: 660,
         ),
         webMaxWidth: 660,

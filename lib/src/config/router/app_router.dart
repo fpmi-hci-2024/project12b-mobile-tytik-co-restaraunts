@@ -9,6 +9,7 @@ import '../../feature/auth_page/presentation/register_page.dart';
 import '../../feature/auth_page/presentation/sign_in_page.dart';
 import '../../feature/cafe_page/presentation/bloc/cafe_bloc.dart';
 import '../../feature/cafe_page/presentation/cafe_page.dart';
+import '../../feature/history_page/presentation/history_page.dart';
 import '../../feature/home_page/presentation/home_page.dart';
 
 part 'app_router.gr.dart';
@@ -45,6 +46,11 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           page: CartRoute.page,
           path: '/cart',
+        ),
+        AutoRoute(
+          page: HistoryRoute.page,
+          path: '/history',
+          initial: kIsWeb,
         ),
       ];
 }
