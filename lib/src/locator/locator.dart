@@ -58,9 +58,9 @@ Future<void> configureCommonDependencies() async {
     CartTheme(),
   );
   locator.registerSingleton<ICafeDataSource>(
-    RemoteCafeDataSource(
-      locator<IDioService>(),
-    ),
+    MockCafeDataSource(
+        //locator<IDioService>(),
+        ),
   );
 
   locator.registerSingleton<IHistoryDataSource>(
@@ -77,9 +77,9 @@ Future<void> configureCommonDependencies() async {
     ),
   );
   locator.registerSingleton<IAllCafesDataSource>(
-    AllCafesDataSource(
-      locator(),
-    ),
+    MockAllCafesDataSource(
+        //locator(),
+        ),
   );
   locator.registerSingleton<IAllCafesRepository>(
     AllCafesRepository(
