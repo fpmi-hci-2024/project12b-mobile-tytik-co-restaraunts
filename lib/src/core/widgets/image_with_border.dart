@@ -37,8 +37,7 @@ class ImageWithBorder extends StatelessWidget {
         borderRadius: BorderRadius.circular(borderRadius - 1),
         child: CachedNetworkImage(
           fit: BoxFit.cover,
-          imageUrl:
-              url,
+          imageUrl: url,
         ),
       ),
     );

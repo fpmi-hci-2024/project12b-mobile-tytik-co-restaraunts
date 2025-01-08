@@ -10,18 +10,18 @@ class CustomSwitch extends StatefulWidget {
   final double width;
 
   const CustomSwitch({
-    Key? key,
+    super.key,
     required this.leftName,
     required this.rightName,
     required this.onTap,
     this.width = 200,
-  }) : super(key: key);
+  });
 
   @override
-  _CustomSwitchState createState() => _CustomSwitchState();
+  CustomSwitchState createState() => CustomSwitchState();
 }
 
-class _CustomSwitchState extends State<CustomSwitch> {
+class CustomSwitchState extends State<CustomSwitch> {
   int _selectedIndex = 0;
 
   void _onTap(int index) {
@@ -45,7 +45,7 @@ class _CustomSwitchState extends State<CustomSwitch> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: _selectedIndex != 0
-                      ? BorderRadius.vertical(
+                      ? const BorderRadius.vertical(
                           bottom: Radius.circular(5),
                         )
                       : BorderRadius.circular(5),
@@ -95,7 +95,7 @@ class _CustomSwitchState extends State<CustomSwitch> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: _selectedIndex != 1
-                      ? BorderRadius.vertical(
+                      ? const BorderRadius.vertical(
                           bottom: Radius.circular(5),
                         )
                       : BorderRadius.circular(5),

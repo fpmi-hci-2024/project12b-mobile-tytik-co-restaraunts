@@ -164,7 +164,7 @@ class HistoryPage extends StatelessWidget {
                       return _buildPositionCard(position);
                     },
                     separatorBuilder: (context, index) {
-                      return SizedBox(
+                      return const SizedBox(
                         height: 16,
                       );
                     },

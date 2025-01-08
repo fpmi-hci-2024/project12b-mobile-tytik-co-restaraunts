@@ -1,6 +1,5 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,8 +10,6 @@ import 'package:monkey_delivery/src/core/widgets/custom_text_field.dart';
 import 'package:monkey_delivery/src/feature/cafe_page/presentation/bloc/cafe_bloc.dart';
 import 'package:monkey_delivery/src/feature/cart_page/presentation/bloc/cart_bloc.dart';
 
-import '../../../core/domain/entities/cafe.dart';
-import '../../../core/domain/entities/menu_position.dart';
 import '../../../core/domain/entities/order.dart';
 import '../../../core/widgets/big_cafe_card.dart';
 import '../../../core/widgets/big_menu_position_card.dart';

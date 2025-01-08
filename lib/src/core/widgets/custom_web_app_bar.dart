@@ -49,7 +49,7 @@ class CustomWebAppBar extends StatelessWidget implements PreferredSizeWidget {
                   if (addGoBackButton)
                     GestureDetector(
                       onTap: () {
-                        appRouter.pop();
+                        appRouter.maybePop();
                       },
                       behavior: HitTestBehavior.opaque,
                       child: const Padding(

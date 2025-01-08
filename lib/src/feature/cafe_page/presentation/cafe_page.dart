@@ -334,7 +334,7 @@ class CafePage extends StatelessWidget {
 class _BulletList extends StatelessWidget {
   final List<String> items;
 
-  const _BulletList({super.key, required this.items});
+  const _BulletList({required this.items});
 
   @override
   Widget build(BuildContext context) {

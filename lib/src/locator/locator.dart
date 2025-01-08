@@ -7,7 +7,6 @@ import 'package:monkey_delivery/src/feature/auth_page/domain/data_sources/i_user
 import 'package:monkey_delivery/src/feature/auth_page/domain/repositories/i_user_information_repository.dart';
 import 'package:monkey_delivery/src/feature/auth_page/presentation/config/auth_page_theme.dart';
 import 'package:monkey_delivery/src/feature/auth_page/presentation/new_sign_in_bloc/new_sign_in_bloc.dart';
-import 'package:monkey_delivery/src/feature/cafe_page/data/data_sources/mock_cafe_data_source.dart';
 import 'package:monkey_delivery/src/feature/cafe_page/data/data_sources/remote_cafe_data_source.dart';
 import 'package:monkey_delivery/src/feature/cafe_page/data/repositories/cafe_repositoty.dart';
 import 'package:monkey_delivery/src/feature/cafe_page/domain/data_sources/i_cafe_data_source.dart';
@@ -18,7 +17,6 @@ import 'package:monkey_delivery/src/feature/history_page/data/repositories/histo
 import 'package:monkey_delivery/src/feature/history_page/domain/data_sources/i_history_data_source.dart';
 import 'package:monkey_delivery/src/feature/history_page/domain/repositories/i_history_repository.dart';
 import 'package:monkey_delivery/src/feature/history_page/presentation/bloc/history_bloc.dart';
-import 'package:monkey_delivery/src/feature/home_page/data/data_sources/mock_all_cafes_data_source.dart';
 
 import '../feature/auth_page/data/data_sources/user_information_data_source.dart';
 import '../feature/auth_page/data/repositories/user_information_repository.dart';

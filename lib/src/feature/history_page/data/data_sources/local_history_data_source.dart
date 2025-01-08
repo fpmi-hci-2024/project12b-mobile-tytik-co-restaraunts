@@ -16,12 +16,13 @@ class LocalHistoryDataSource implements IHistoryDataSource {
     final List<Order> history = historyString == null
         ? []
         : (jsonDecode(historyString) as List)
-        .map((e) => Order.fromJson(e))
-        .toList();
+            .map((e) => Order.fromJson(e))
+            .toList();
 
     history.add(order);
 
-    final updatedHistoryString = jsonEncode(history.map((e) => e.toJson()).toList());
+    final updatedHistoryString =
+        jsonEncode(history.map((e) => e.toJson()).toList());
     await prefs.setString(historyKey, updatedHistoryString);
   }
 

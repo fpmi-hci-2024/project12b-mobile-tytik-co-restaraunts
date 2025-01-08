@@ -1,8 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:monkey_delivery/src/core/widgets/cafe_card.dart';
 import 'package:monkey_delivery/src/core/widgets/custom_text_field.dart';
@@ -10,7 +8,6 @@ import 'package:monkey_delivery/src/core/widgets/cutom_app_bar_wrapper.dart';
 import 'package:monkey_delivery/src/feature/home_page/presentation/bloc/home_bloc.dart';
 
 import '../../../config/router/app_router.dart';
-import '../../../core/domain/entities/cafe.dart';
 import '../../../core/widgets/big_cafe_card.dart';
 import '../../../core/widgets/custom_scaffold.dart';
 import '../../../locator/locator.dart';
