@@ -6,6 +6,7 @@ class Order {
   final String address;
   final String? comment;
   final String userName;
+  final DateTime creationDateTime;
   final List<MenuPosition> positions;
 
   Order({
@@ -14,6 +15,7 @@ class Order {
     required this.address,
     this.comment,
     required this.userName,
+    required this.creationDateTime,
     required this.positions,
   });
 
@@ -27,6 +29,7 @@ class Order {
           .map((e) => MenuPosition.fromJson(e))
           .toList(),
       userName: json['userName'],
+      creationDateTime: DateTime.parse(json['creationDateTime']),
     );
   }
 }
@@ -40,6 +43,7 @@ extension OrderSerialization on Order {
       'comment': comment,
       'address': address,
       'userName': userName,
+      'creationDateTime': creationDateTime.toIso8601String(),
     };
   }
 }

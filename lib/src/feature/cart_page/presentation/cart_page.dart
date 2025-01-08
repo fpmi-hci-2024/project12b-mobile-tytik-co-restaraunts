@@ -259,6 +259,7 @@ class CartPage extends StatelessWidget {
                                         address: state.address,
                                         userName: state.name,
                                         comment: state.comment,
+                                        creationDateTime: DateTime.now(),
                                       ),
                                     ),
                                   );

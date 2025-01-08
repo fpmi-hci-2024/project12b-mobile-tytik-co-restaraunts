@@ -40,7 +40,8 @@ class HistoryPage extends StatelessWidget {
               if (!state.isLoaded) {
                 return Center(
                   child: CircularProgressIndicator(
-                      color: theme.primaryBorderColor),
+                    color: theme.primaryBorderColor,
+                  ),
                 );
               }
               return Padding(
@@ -70,7 +71,8 @@ class HistoryPage extends StatelessWidget {
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: state.orders.length,
                       itemBuilder: (context, index) => CustomButton(
-                        text: state.orders[index].cafeName,
+                        text:
+                            '${_getDate(state.orders[index].creationDateTime)} Cafe ${state.orders[index].cafeName}',
                         onTap: () => _showBottomSheet(
                           context,
                           state.orders[index],
@@ -122,7 +124,6 @@ class HistoryPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // Заголовок - название кафе
                   Center(
                     child: Text(
                       order.cafeName,
@@ -132,6 +133,8 @@ class HistoryPage extends StatelessWidget {
                       ),
                     ),
                   ),
+                  const SizedBox(height: 16.0),
+                  _buildInfoRow("Date", _getDate(order.creationDateTime)),
                   const SizedBox(height: 16.0),
                   _buildInfoRow("Address", order.address),
                   const SizedBox(height: 16.0),
@@ -203,5 +206,9 @@ class HistoryPage extends StatelessWidget {
       onCountChanged: (_) {},
       showButtons: false,
     );
+  }
+
+  String _getDate(DateTime time) {
+    return '${time.day.toString()}.${time.month.toString()}.${time.year.toString()} ${time.hour.toString()}:${time.minute.toString()}';
   }
 }
