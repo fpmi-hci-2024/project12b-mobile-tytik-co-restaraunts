@@ -113,55 +113,61 @@ class HistoryPage extends StatelessWidget {
               top: Radius.circular(25.0),
             ),
           ),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // Заголовок - название кафе
-                Center(
-                  child: Text(
-                    order.cafeName,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w800,
-                      fontSize: 24,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height * 0.8,
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Заголовок - название кафе
+                  Center(
+                    child: Text(
+                      order.cafeName,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 24,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 16.0),
-                _buildInfoRow("Address", order.address),
-                const SizedBox(height: 8.0),
-                _buildInfoRow("Client name", order.userName),
-                const SizedBox(height: 8.0),
-                if (order.comment != null && order.comment!.isNotEmpty)
-                  _buildInfoRow("Comment", order.comment!),
-                const SizedBox(height: 16.0),
-                _buildInfoRow(
-                    "Full price", "${order.price.toStringAsFixed(2)} \$"),
-                const SizedBox(height: 16.0),
-                const Text(
-                  "Positions:",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 18,
+                  const SizedBox(height: 16.0),
+                  _buildInfoRow("Address", order.address),
+                  const SizedBox(height: 16.0),
+                  _buildInfoRow("Client name", order.userName),
+                  const SizedBox(height: 16.0),
+                  if (order.comment != null && order.comment!.isNotEmpty) ...[
+                    _buildInfoRow("Comment", order.comment!),
+                    const SizedBox(height: 16.0),
+                  ],
+                  _buildInfoRow(
+                      "Full price", "${order.price.toStringAsFixed(2)} \$"),
+                  const SizedBox(height: 16.0),
+                  const Text(
+                    "Positions:",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 8.0),
-                ListView.separated(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: order.positions.length,
-                  itemBuilder: (context, index) {
-                    final position = order.positions[index];
-                    return _buildPositionCard(position);
-                  },
-                  separatorBuilder: (context, index) {
-                    return SizedBox(
-                      height: 16,
-                    );
-                  },
-                ),
-              ],
+                  const SizedBox(height: 8.0),
+                  ListView.separated(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: order.positions.length,
+                    itemBuilder: (context, index) {
+                      final position = order.positions[index];
+                      return _buildPositionCard(position);
+                    },
+                    separatorBuilder: (context, index) {
+                      return SizedBox(
+                        height: 16,
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         );
