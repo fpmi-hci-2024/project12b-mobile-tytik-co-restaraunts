@@ -1,4 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:monkey_delivery/src/core/data/services/dio_service.dart';
+import 'package:monkey_delivery/src/core/domain/services/i_dio_service.dart';
 import 'package:monkey_delivery/src/core/widgets/config/common_widgets_theme.dart';
 import 'package:monkey_delivery/src/feature/auth_page/domain/data_sources/i_user_information_data_source.dart';
 import 'package:monkey_delivery/src/feature/auth_page/domain/repositories/i_user_information_repository.dart';
@@ -25,6 +28,12 @@ import '../feature/home_page/presentation/config/home_page_theme.dart';
 final locator = GetIt.instance;
 
 Future<void> configureCommonDependencies() async {
+  locator.registerSingleton<IDioService>(
+    DioService(
+      Dio(),
+    ),
+  );
+
   locator.registerSingleton<CommonWidgetsTheme>(
     CommonWidgetsTheme(),
   );

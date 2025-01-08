@@ -10,6 +10,8 @@ class MenuPosition {
   final double cost;
   final List<String>? ingredients;
   final MenuPositionType type;
+
+  //for app
   final int count;
 
   const MenuPosition({
