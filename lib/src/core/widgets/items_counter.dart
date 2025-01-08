@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class ItemsCounter extends StatefulWidget {
   final Function(int) onValueChanged;
   final int value;
+  final bool showButtons;
 
   const ItemsCounter({
     super.key,
     required this.onValueChanged,
     required this.value,
+    this.showButtons = true,
   });
 
   @override
@@ -31,16 +33,18 @@ class _ItemsCounterState extends State<ItemsCounter> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        InkWell(
-          onTap: () => widget.onValueChanged(widget.value - 1),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
-            child: Text(
-              '-',
-              style: _textStyle,
+        if (widget.showButtons)
+          InkWell(
+            onTap: () => widget.onValueChanged(widget.value - 1),
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
+              child: Text(
+                '-',
+                style: _textStyle,
+              ),
             ),
           ),
-        ),
         const SizedBox(
           width: 5,
         ),
@@ -51,16 +55,18 @@ class _ItemsCounterState extends State<ItemsCounter> {
         const SizedBox(
           width: 5,
         ),
-        InkWell(
-          onTap: () => widget.onValueChanged(widget.value + 1),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
-            child: Text(
-              '+',
-              style: _textStyle,
+        if (widget.showButtons)
+          InkWell(
+            onTap: () => widget.onValueChanged(widget.value + 1),
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
+              child: Text(
+                '+',
+                style: _textStyle,
+              ),
             ),
-          ),
-        )
+          )
       ],
     );
   }

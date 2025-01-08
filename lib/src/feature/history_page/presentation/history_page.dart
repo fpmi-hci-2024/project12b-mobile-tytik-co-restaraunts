@@ -1,13 +1,17 @@
 import 'package:auto_route/annotations.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:monkey_delivery/src/core/widgets/custom_button.dart';
 import 'package:monkey_delivery/src/core/widgets/custom_scaffold.dart';
+import 'package:monkey_delivery/src/core/widgets/menu_position_card.dart';
 
 import '../../../config/themes/app_theme.dart';
+import '../../../core/domain/entities/menu_position.dart';
+import '../../../core/domain/entities/order.dart';
 import '../../../core/widgets/cutom_app_bar_wrapper.dart';
 import '../../../locator/locator.dart';
 import '../../cafe_page/presentation/config/cafe_page_theme.dart';
+import 'bloc/history_bloc.dart';
 
 @RoutePage()
 class HistoryPage extends StatelessWidget {
@@ -17,10 +21,6 @@ class HistoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = AppTheme();
 
-    final List<String> orders = [
-      'Order 1',
-      'Order 2',
-    ];
     return CustomScaffold(
       appBar: CustomAppBarWrapper(
         titleText: theme.appName,
@@ -29,45 +29,62 @@ class HistoryPage extends StatelessWidget {
         webContentWidth: 660,
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-          ),
-          child: ListView(
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              const Align(
-                alignment: Alignment.center,
-                child: Text(
-                  'Orders History',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w800,
-                    fontSize: 30,
-                  ),
+        child: BlocProvider<HistoryBloc>(
+          create: (_) => locator<HistoryBloc>()
+            ..add(
+              const InitHistoryPage(),
+            ),
+          child: Builder(builder: (context) {
+            return BlocBuilder<HistoryBloc, HistoryState>(
+                builder: (context, state) {
+              if (!state.isLoaded) {
+                return Center(
+                  child: CircularProgressIndicator(
+                      color: theme.primaryBorderColor),
+                );
+              }
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              ListView.separated(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: orders.length,
-                itemBuilder: (context, index) => CustomButton(
-                  text: orders[index],
-                  onTap: () => _showBottomSheet(
-                    context,
-                    orders[index],
-                  ),
+                child: ListView(
+                  children: [
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Orders History',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 30,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    ListView.separated(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: state.orders.length,
+                      itemBuilder: (context, index) => CustomButton(
+                        text: state.orders[index].cafeName,
+                        onTap: () => _showBottomSheet(
+                          context,
+                          state.orders[index],
+                        ),
+                      ),
+                      separatorBuilder: (context, index) => const SizedBox(
+                        height: 20,
+                      ),
+                    ),
+                  ],
                 ),
-                separatorBuilder: (context, index) => const SizedBox(
-                  height: 20,
-                ),
-              ),
-            ],
-          ),
+              );
+            });
+          }),
         ),
       ),
     );
@@ -75,7 +92,7 @@ class HistoryPage extends StatelessWidget {
 
   Future<void> _showBottomSheet(
     BuildContext context,
-    String text,
+    Order order,
   ) async {
     await showModalBottomSheet(
       context: context,
@@ -89,28 +106,96 @@ class HistoryPage extends StatelessWidget {
         final theme = locator<CafeTheme>();
         return Container(
           width: double.infinity,
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
           decoration: BoxDecoration(
             color: theme.bottomSheetColor,
             borderRadius: const BorderRadius.vertical(
               top: Radius.circular(25.0),
             ),
           ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                text,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w800,
-                  fontSize: 20,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Заголовок - название кафе
+                Center(
+                  child: Text(
+                    order.cafeName,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 24,
+                    ),
+                  ),
                 ),
-              ),
-            ],
+                const SizedBox(height: 16.0),
+                _buildInfoRow("Address", order.address),
+                const SizedBox(height: 8.0),
+                _buildInfoRow("Client name", order.userName),
+                const SizedBox(height: 8.0),
+                if (order.comment != null && order.comment!.isNotEmpty)
+                  _buildInfoRow("Comment", order.comment!),
+                const SizedBox(height: 16.0),
+                _buildInfoRow(
+                    "Full price", "${order.price.toStringAsFixed(2)} \$"),
+                const SizedBox(height: 16.0),
+                const Text(
+                  "Positions:",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 18,
+                  ),
+                ),
+                const SizedBox(height: 8.0),
+                ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: order.positions.length,
+                  itemBuilder: (context, index) {
+                    final position = order.positions[index];
+                    return _buildPositionCard(position);
+                  },
+                  separatorBuilder: (context, index) {
+                    return SizedBox(
+                      height: 16,
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         );
       },
+    );
+  }
+
+  Widget _buildInfoRow(String title, String value) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "$title: ",
+          style: const TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: 16,
+          ),
+        ),
+        Expanded(
+          child: Text(
+            value,
+            style: const TextStyle(fontSize: 16),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPositionCard(MenuPosition position) {
+    return MenuPositionCard(
+      showFullPrice: true,
+      menuPosition: position,
+      onCountChanged: (_) {},
+      showButtons: false,
     );
   }
 }

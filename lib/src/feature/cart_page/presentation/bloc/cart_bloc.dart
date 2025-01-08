@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:monkey_delivery/src/core/domain/entities/order.dart';
 
 import '../../../auth_page/domain/entities/user_information.dart';
 import '../../../auth_page/domain/repositories/i_user_information_repository.dart';
+import '../../../history_page/domain/repositories/i_history_repository.dart';
 
 part 'cart_state.dart';
 
@@ -10,12 +12,15 @@ part 'cart_event.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
   final IUserInformationRepository _userInformationRepository;
+  final IHistoryRepository _historyRepository;
 
   CartBloc(
     this._userInformationRepository,
+    this._historyRepository,
   ) : super(const CartState()) {
     on<LoadUserInformation>(_onLoadUserInformation);
     on<TextFieldChanged>(_onTextFieldChanged);
+    on<CreateOrder>(_onCreateOrder);
   }
 
   Future<void> _onLoadUserInformation(
@@ -39,6 +44,18 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         ),
       );
     }
+  }
+
+  Future<void> _onCreateOrder(
+    CreateOrder event,
+    Emitter<CartState> emit,
+  ) async {
+    await _historyRepository.addToHistory(event.order);
+    emit(
+      state.copyWith(
+        orderSent: true,
+      ),
+    );
   }
 
   void _onTextFieldChanged(
