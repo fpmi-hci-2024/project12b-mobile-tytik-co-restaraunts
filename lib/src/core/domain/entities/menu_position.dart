@@ -1,7 +1,20 @@
 enum MenuPositionType {
   food,
   drink;
+
+  factory MenuPositionType.fromString(String name) {
+    switch (name) {
+      case 'food':
+        return MenuPositionType.food;
+      case 'drink':
+        return MenuPositionType.drink;
+      default:
+        return MenuPositionType.food;
+    }
+  }
 }
+
+extension on MenuPositionType {}
 
 class MenuPosition {
   final String id;

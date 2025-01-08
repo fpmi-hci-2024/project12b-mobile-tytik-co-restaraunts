@@ -8,6 +8,7 @@ import 'package:monkey_delivery/src/feature/auth_page/domain/repositories/i_user
 import 'package:monkey_delivery/src/feature/auth_page/presentation/config/auth_page_theme.dart';
 import 'package:monkey_delivery/src/feature/auth_page/presentation/new_sign_in_bloc/new_sign_in_bloc.dart';
 import 'package:monkey_delivery/src/feature/cafe_page/data/data_sources/mock_cafe_data_source.dart';
+import 'package:monkey_delivery/src/feature/cafe_page/data/data_sources/remote_cafe_data_source.dart';
 import 'package:monkey_delivery/src/feature/cafe_page/data/repositories/cafe_repositoty.dart';
 import 'package:monkey_delivery/src/feature/cafe_page/domain/data_sources/i_cafe_data_source.dart';
 import 'package:monkey_delivery/src/feature/cafe_page/domain/repositories/i_cafe_repository.dart';
@@ -57,7 +58,9 @@ Future<void> configureCommonDependencies() async {
     CartTheme(),
   );
   locator.registerSingleton<ICafeDataSource>(
-    MockCafeDataSource(),
+    RemoteCafeDataSource(
+      locator<IDioService>(),
+    ),
   );
 
   locator.registerSingleton<IHistoryDataSource>(
