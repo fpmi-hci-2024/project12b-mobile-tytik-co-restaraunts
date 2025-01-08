@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:convert';
 
 class Cafe {
   final String logoUrl;
@@ -20,10 +21,14 @@ class Cafe {
         logoUrl = '';
 
   factory Cafe.fromJson(Map<String, dynamic> json) {
+    int seedHash = json['name'].hashCode;
+    seedHash = seedHash.abs();
+    final random = Random(seedHash);
+    final result = 3 + random.nextDouble() * 2;
     return Cafe(
       id: json['id'] as String,
       name: json['name'] as String,
-      rating: 5.0,
+      rating: result,
       logoUrl: json['logo_url'] as String,
     );
   }

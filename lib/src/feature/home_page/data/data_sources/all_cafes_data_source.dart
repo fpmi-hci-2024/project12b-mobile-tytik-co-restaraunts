@@ -11,7 +11,10 @@ class AllCafesDataSource implements IAllCafesDataSource {
   @override
   Future<List<Cafe>> findCafes(String query) async {
     final cafes = await getAllCafes();
-    return cafes.where((element) => element.name.contains(query)).toList();
+    return cafes
+        .where((element) =>
+            element.name.toLowerCase().contains(query.toLowerCase()))
+        .toList();
   }
 
   @override
@@ -32,6 +35,7 @@ class AllCafesDataSource implements IAllCafesDataSource {
   Future<Cafe> getBestDaily() async {
     final cafes = await getAllCafes();
 
-    return cafes.firstWhere((element) => (element.rating ?? 0) > 4);
+    return cafes.firstWhere(
+        (element) => cafes.last == element ? true : (element.rating ?? 0) > 4);
   }
 }
