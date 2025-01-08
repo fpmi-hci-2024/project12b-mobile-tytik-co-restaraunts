@@ -32,14 +32,16 @@ class CartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = locator<CartTheme>();
     return BlocProvider<CartBloc>(
-      create: (_) => locator<CartBloc>()..add(const LoadUserInformation()),
+      create: (_) =>
+      locator<CartBloc>()
+        ..add(const LoadUserInformation()),
       child: BlocProvider<CafeBloc>.value(
         value: cafeBloc,
         child: BlocBuilder<CafeBloc, CafeState>(
           builder: (context, state) {
             var totalCost = 0.0;
             final items =
-                state.menu.where((element) => element.count > 0).toList();
+            state.menu.where((element) => element.count > 0).toList();
             for (var item in items) {
               totalCost += item.cost * item.count;
             }
@@ -54,17 +56,15 @@ class CartPage extends StatelessWidget {
               webMaxWidth: 660,
               body: BlocConsumer<CartBloc, CartState>(
                   listener: (oldState, newState) {
-                if (newState.orderSent) {
-                  if (!kIsWeb) {
-                    appRouter.popUntilRoot();
-                  } else {
-                    appRouter.replace(const HomeRoute());
-                  }
-                }
-              }, builder: (
-                context,
-                state,
-              ) {
+                    if (newState.orderSent) {
+                      if (!kIsWeb) {
+                        appRouter.popUntilRoot();
+                      } else {
+                        appRouter.replace(const HomeRoute());
+                      }
+                    }
+                  }, builder: (context,
+                  state,) {
                 if (!state.isLoaded) {
                   return Center(
                     child: CircularProgressIndicator(
@@ -97,95 +97,95 @@ class CartPage extends StatelessWidget {
                       ),
                       kIsWeb
                           ? ListView(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              children: [
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Align(
-                                  alignment: Alignment.topCenter,
-                                  child: CustomButton(
-                                    text: cafeBloc.state.cafe.name,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Align(
-                                  alignment: Alignment.topCenter,
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 20),
-                                    child: Wrap(
-                                      spacing: 20,
-                                      runSpacing: 20,
-                                      children: items.map((item) {
-                                        return SizedBox(
-                                          width: (660 - 60) / 2,
-                                          height: 300,
-                                          child: BigMenuPositionCard(
-                                            onCountChanged: (int count) {
-                                              cafeBloc.add(
-                                                ChangeMenuPositionCount(
-                                                  id: item.id,
-                                                  newCount: count,
-                                                ),
-                                              );
-                                            },
-                                            menuPosition: item,
-                                            showFullPrice: true,
-                                          ),
-                                        );
-                                      }).toList(),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            )
-                          : ListView(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              children: [
-                                Align(
-                                  alignment: Alignment.topCenter,
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 20),
-                                    child:
-                                        BigCafeCard(cafe: cafeBloc.state.cafe),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 25,
-                                  ),
-                                  child: ListView.separated(
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    itemBuilder: (context, index) =>
-                                        MenuPositionCard(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        children: [
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Align(
+                            alignment: Alignment.topCenter,
+                            child: CustomButton(
+                              text: cafeBloc.state.cafe.name,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Align(
+                            alignment: Alignment.topCenter,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 20),
+                              child: Wrap(
+                                spacing: 20,
+                                runSpacing: 20,
+                                children: items.map((item) {
+                                  return SizedBox(
+                                    width: (660 - 60) / 2,
+                                    height: 300,
+                                    child: BigMenuPositionCard(
                                       onCountChanged: (int count) {
                                         cafeBloc.add(
                                           ChangeMenuPositionCount(
-                                            id: items[index].id,
+                                            id: item.id,
                                             newCount: count,
                                           ),
                                         );
                                       },
-                                      menuPosition: items[index],
+                                      menuPosition: item,
                                       showFullPrice: true,
                                     ),
-                                    separatorBuilder: (context, index) =>
-                                        const SizedBox(
-                                      height: 25,
-                                    ),
-                                    itemCount: items.length,
-                                  ),
-                                ),
-                              ],
+                                  );
+                                }).toList(),
+                              ),
                             ),
+                          ),
+                        ],
+                      )
+                          : ListView(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        children: [
+                          Align(
+                            alignment: Alignment.topCenter,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 20),
+                              child:
+                              BigCafeCard(cafe: cafeBloc.state.cafe),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 25,
+                            ),
+                            child: ListView.separated(
+                              physics:
+                              const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) =>
+                                  MenuPositionCard(
+                                    onCountChanged: (int count) {
+                                      cafeBloc.add(
+                                        ChangeMenuPositionCount(
+                                          id: items[index].id,
+                                          newCount: count,
+                                        ),
+                                      );
+                                    },
+                                    menuPosition: items[index],
+                                    showFullPrice: true,
+                                  ),
+                              separatorBuilder: (context, index) =>
+                              const SizedBox(
+                                height: 25,
+                              ),
+                              itemCount: items.length,
+                            ),
+                          ),
+                        ],
+                      ),
                       CustomTextField(
                         placeholderText: 'Enter You Name',
                         initialText: state.name,
@@ -217,6 +217,7 @@ class CartPage extends StatelessWidget {
                       CustomMultilineTextField(
                         placeholderText: 'Comment your order',
                         onChanged: (value) {
+                          print('::IK:: AAA ${state.comment}');
                           bloc.add(
                             TextFieldChanged(
                               comment: value,
@@ -247,20 +248,22 @@ class CartPage extends StatelessWidget {
                           height: 41,
                           width: 200,
                           onTap: (state.name.isNotEmpty &&
-                                  state.address.isNotEmpty)
+                              state.address.isNotEmpty &&
+                              items.isNotEmpty)
                               ? () {
-                                  bloc.add(
-                                    CreateOrder(
-                                      Order(
-                                        price: totalCost,
-                                        cafeName: cafeBloc.state.cafe.name,
-                                        positions: items,
-                                        address: state.address,
-                                        userName: state.name,
-                                      ),
-                                    ),
-                                  );
-                                }
+                            bloc.add(
+                              CreateOrder(
+                                Order(
+                                  price: totalCost,
+                                  cafeName: cafeBloc.state.cafe.name,
+                                  positions: items,
+                                  address: state.address,
+                                  userName: state.name,
+                                  comment: state.comment,
+                                ),
+                              ),
+                            );
+                          }
                               : null,
                         ),
                       ),
