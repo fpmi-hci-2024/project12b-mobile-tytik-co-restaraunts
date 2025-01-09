@@ -21,5 +21,7 @@ class TextFieldChanged extends CartEvent {
 }
 
 class CreateOrder extends CartEvent {
-  const CreateOrder();
+  final Order order;
+
+  const CreateOrder(this.order);
 }

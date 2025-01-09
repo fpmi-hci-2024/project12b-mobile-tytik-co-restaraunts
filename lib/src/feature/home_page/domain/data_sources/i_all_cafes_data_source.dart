@@ -6,5 +6,4 @@ abstract interface class IAllCafesDataSource {
   Future<List<Cafe>> findCafes(String query);
 
   Future<Cafe> getBestDaily();
-
 }

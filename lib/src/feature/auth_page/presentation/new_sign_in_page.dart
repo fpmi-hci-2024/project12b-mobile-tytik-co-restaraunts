@@ -1,7 +1,6 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:monkey_delivery/src/config/router/app_router.dart';
@@ -43,12 +42,12 @@ class NewSignInPage extends StatelessWidget {
             final bloc = context.read<NewSignInBloc>();
             return Stack(
               children: [
-                Align(
+                const Align(
                   alignment: Alignment.topCenter,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const SizedBox(
+                      SizedBox(
                         height: 100,
                       ),
                       Padding(
@@ -58,7 +57,7 @@ class NewSignInPage extends StatelessWidget {
                         child: Text(
                           'Write your contact info!',
                           textAlign: TextAlign.center,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.w800,
                           ),

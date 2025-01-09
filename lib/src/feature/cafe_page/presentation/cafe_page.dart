@@ -41,9 +41,9 @@ class CafePage extends StatelessWidget {
             addGoBackButton: true,
             titleText: theme.appName,
             height: 50,
-            leadingIcon: const Icon(
+            /*leadingIcon: const Icon(
               Icons.settings,
-            ),
+            ),*/
             trailingIcon: const Icon(
               Icons.shopping_cart,
             ),
@@ -334,7 +334,7 @@ class CafePage extends StatelessWidget {
 class _BulletList extends StatelessWidget {
   final List<String> items;
 
-  const _BulletList({super.key, required this.items});
+  const _BulletList({required this.items});
 
   @override
   Widget build(BuildContext context) {

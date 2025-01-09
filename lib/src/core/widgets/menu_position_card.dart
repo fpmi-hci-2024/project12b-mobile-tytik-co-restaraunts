@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:monkey_delivery/src/core/domain/entities/menu_position.dart';
 
 import '../../locator/locator.dart';
@@ -15,6 +13,7 @@ class MenuPositionCard extends StatelessWidget {
   final VoidCallback? onTap;
   final Function(int) onCountChanged;
   final bool showFullPrice;
+  final bool showButtons;
 
   const MenuPositionCard({
     required this.menuPosition,
@@ -24,6 +23,7 @@ class MenuPositionCard extends StatelessWidget {
     this.onTap,
     required this.onCountChanged,
     this.showFullPrice = false,
+    this.showButtons = true,
   });
 
   @override
@@ -122,6 +122,7 @@ class MenuPositionCard extends StatelessWidget {
                 child: ItemsCounter(
                   onValueChanged: onCountChanged,
                   value: menuPosition.count,
+                  showButtons: showButtons,
                 ),
               ),
             ],

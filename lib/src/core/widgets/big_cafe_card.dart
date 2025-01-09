@@ -1,14 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
-import 'package:monkey_delivery/src/config/router/app_router.dart';
 import 'package:monkey_delivery/src/core/domain/entities/cafe.dart';
 import 'package:monkey_delivery/src/core/widgets/image_with_border.dart';
-
-import '../../locator/locator.dart';
-import 'config/common_widgets_theme.dart';
 
 class BigCafeCard extends StatelessWidget {
   final Cafe cafe;
@@ -30,7 +25,6 @@ class BigCafeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = locator<CommonWidgetsTheme>();
     return GestureDetector(
       onTap: onTap,
       child: Stack(

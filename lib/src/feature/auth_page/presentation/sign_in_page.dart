@@ -1,8 +1,5 @@
 import 'package:auto_route/annotations.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
 import 'package:monkey_delivery/src/config/router/app_router.dart';
 import 'package:monkey_delivery/src/core/widgets/custom_text_field.dart';
 
@@ -87,7 +84,7 @@ class SignInPage extends StatelessWidget {
                   text: theme.signInButtonText,
                   onTap: () {
                     appRouter.popAndPush(
-                      HomeRoute(),
+                      const HomeRoute(),
                     );
                   },
                 ),

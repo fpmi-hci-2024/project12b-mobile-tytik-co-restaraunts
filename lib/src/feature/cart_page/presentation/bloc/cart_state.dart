@@ -6,6 +6,7 @@ class CartState {
   final String address;
   final String comment;
   final bool isLoaded;
+  final bool orderSent;
 
   const CartState({
     this.userInformation = const UserInformation.empty(),
@@ -13,6 +14,7 @@ class CartState {
     this.address = '',
     this.comment = '',
     this.isLoaded = false,
+    this.orderSent = false,
   });
 
   CartState copyWith({
@@ -21,6 +23,7 @@ class CartState {
     String? address,
     String? comment,
     bool? isLoaded,
+    bool? orderSent,
   }) {
     return CartState(
       userInformation: userInformation ?? this.userInformation,
@@ -28,6 +31,7 @@ class CartState {
       address: address ?? this.address,
       isLoaded: isLoaded ?? this.isLoaded,
       comment: comment ?? this.comment,
+      orderSent: orderSent ?? this.orderSent,
     );
   }
 }

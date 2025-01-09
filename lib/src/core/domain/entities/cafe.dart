@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'dart:convert';
 
 class Cafe {
   final String logoUrl;
